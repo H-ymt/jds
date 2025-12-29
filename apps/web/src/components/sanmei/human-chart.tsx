@@ -120,7 +120,7 @@ export function InsenCard({ pillars }: InsenCardProps) {
           {pillarData.map(({ key, label, desc }) => (
             <div
               key={key}
-              className="flex flex-col items-center rounded-3xl bg-muted/30 p-8 transition-colors group"
+              className="flex flex-col items-center rounded-3xl bg-muted/30 dark:bg-muted/10 p-8 transition-colors group"
             >
               <span className="text-[10px] font-bold text-muted-foreground mb-6 uppercase tracking-widest">
                 {label}
@@ -148,19 +148,23 @@ interface KangoCardProps {
 
 export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoCardProps) {
   return (
-    <Card className="rounded-[3rem] border-none shadow-xl bg-linear-to-r from-pink-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-700">
+    <Card className="rounded-[3rem] border-none shadow-xl bg-linear-to-r from-pink-500/10 via-purple-500/10 to-pink-500/10 dark:from-pink-900/20 dark:via-purple-900/20 dark:to-pink-900/20 backdrop-blur-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-700">
       <CardContent className="p-10">
         <div className="flex items-start justify-between gap-6 mb-6">
           <div className="space-y-2 flex-1">
-            <p className="text-[10px] font-black text-pink-500 flex items-center gap-2 uppercase tracking-widest">
-              <span className="inline-block size-1.5 rounded-full bg-pink-500 animate-pulse" />
+            <p className="text-[10px] font-black text-pink-500 dark:text-pink-400 flex items-center gap-2 uppercase tracking-widest">
+              <span className="inline-block size-1.5 rounded-full bg-pink-500 dark:bg-pink-400 animate-pulse" />
               干合（かんごう）検出
             </p>
             <p className="text-sm font-bold text-foreground leading-snug">
-              <span className="text-pink-500">{pair[0]}</span>と
-              <span className="text-purple-500">{pair[1]}</span>が魂レベルで惹き合い、
+              <span className="text-pink-500 dark:text-pink-400">{pair[0]}</span>と
+              <span className="text-purple-500 dark:text-purple-400">{pair[1]}</span>
+              が魂レベルで惹き合い、
               <br />
-              周波数そのものが<span className="text-pink-600 font-extrabold">{transformed}性</span>
+              周波数そのものが
+              <span className="text-pink-600 dark:text-pink-300 font-extrabold">
+                {transformed}性
+              </span>
               へと昇華しました。
             </p>
           </div>
@@ -171,7 +175,7 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
             className={cn(
               "relative h-8 w-14 rounded-full transition-all duration-500 p-1 flex items-center shrink-0 mt-1",
               isTransformed
-                ? "bg-linear-to-r from-pink-500 to-purple-600 shadow-lg shadow-pink-200"
+                ? "bg-linear-to-r from-pink-500 to-purple-600 shadow-lg shadow-pink-200 dark:shadow-pink-900/50"
                 : "bg-muted shadow-inner",
             )}
           >
@@ -191,7 +195,7 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
           </button>
         </div>
 
-        <div className="pt-5 border-t border-pink-500/10 space-y-4">
+        <div className="pt-5 border-t border-pink-500/10 dark:border-pink-500/20 space-y-4">
           <p className="text-[13px] leading-relaxed text-foreground/80 font-medium">
             干合とは、特定のきっかけによって自分の性質が別人のように変化する、非常にドラマチックな現象です。
           </p>
@@ -211,7 +215,7 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
               },
             ].map((item, i) => (
               <div key={i} className="flex gap-3 items-start">
-                <span className="shrink-0 text-[10px] font-black px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-600 border border-pink-500/10 mt-0.5">
+                <span className="shrink-0 text-[10px] font-black px-2 py-0.5 rounded-full bg-pink-500/10 dark:bg-pink-500/20 text-pink-600 dark:text-pink-300 border border-pink-500/10 dark:border-pink-500/20 mt-0.5">
                   {item.title}
                 </span>
                 <p className="text-[12px] leading-relaxed text-muted-foreground font-medium">
@@ -220,7 +224,7 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
               </div>
             ))}
           </div>
-          <p className="text-[11px] text-pink-400 font-bold italic pt-1">
+          <p className="text-[11px] text-pink-400 dark:text-pink-300 font-bold italic pt-1">
             人・自分・時期という3つの側面から、人生にドラマチックな変容をもたらします。
           </p>
         </div>
@@ -242,7 +246,7 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
   return (
     <Card variant="premium" className="relative group overflow-hidden">
       {/* 水影文字 */}
-      <div className="absolute top-4 right-8 opacity-5 select-none pointer-events-none">
+      <div className="absolute top-4 right-8 opacity-5 dark:opacity-[0.02] select-none pointer-events-none">
         <span className="text-[180px] font-black leading-none">{nikkanInfo.name[0]}</span>
       </div>
 
@@ -262,9 +266,11 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
           </div>
         </div>
 
-        <div className="rounded-[1.5rem] bg-orange-500/5 p-8 border border-orange-500/10">
+        <div className="rounded-[1.5rem] bg-orange-500/5 dark:bg-orange-500/10 p-8 border border-orange-500/10 dark:border-orange-500/20">
           <p className="text-[15px] text-foreground/80 leading-relaxed font-bold">
-            <span className="text-orange-600 mr-2 font-black">「{nikkanInfo.nature}」の性質：</span>
+            <span className="text-orange-600 dark:text-orange-400 mr-2 font-black">
+              「{nikkanInfo.nature}」の性質：
+            </span>
             {nikkanInfo.desc}
           </p>
         </div>
