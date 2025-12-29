@@ -1,0 +1,3 @@
+{
+  "extends": "@cfs/config/tsconfig.base.json"
+}
