@@ -5,14 +5,12 @@ import { Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import "../index.css";
 import Providers from "@/components/providers";
 
-// メインフォント: Zen角ゴシック（和風モダン、読みやすい）
 const zenKaku = Zen_Kaku_Gothic_New({
   variable: "--font-zen-kaku",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
 
-// サブフォント: Noto Sans JP（フォールバック用）
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],

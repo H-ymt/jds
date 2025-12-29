@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="48" fill="#1e1e2e" /> <!-- Dark background -->
+    
+    <!-- 5 Elements Circles (Gogyo Cycle) -->
+    <!-- Wood (Top Center) -->
+    <circle cx="50" cy="22" r="8" fill="#10b981" />
+    
+    <!-- Fire (Right Top) -->
+    <circle cx="77" cy="41" r="8" fill="#ef4444" />
+    
+    <!-- Earth (Right Bottom) -->
+    <circle cx="67" cy="73" r="8" fill="#f59e0b" />
+    
+    <!-- Metal (Left Bottom) -->
+    <circle cx="33" cy="73" r="8" fill="#64748b" />
+    
+    <!-- Water (Left Top) -->
+    <circle cx="23" cy="41" r="8" fill="#6366f1" />
+    
+    <!-- Generating Cycle Lines (Pentagon) -->
+    <path d="M50 22 L77 41 L67 73 L33 73 L23 41 Z" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1" fill="none"/>
+
+    <!-- Controlling Cycle Lines (Star) -->
+    <path d="M50 22 L67 73 L23 41 L77 41 L33 73 Z" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" fill="none"/>
+
+    <!-- Center Destiny/Star -->
+    <circle cx="50" cy="50" r="4" fill="#a855f7" />
+    <path d="M50 40 L52 48 L60 50 L52 52 L50 60 L48 52 L40 50 L48 48 Z" fill="#ffffff" fill-opacity="0.8"/>
+</svg>
