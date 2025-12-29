@@ -71,6 +71,15 @@ export function usePdfExport(options: UsePdfExportOptions = {}): UsePdfExportRet
             backgroundColor: "#ffffff",
             logging: false,
             allowTaint: true,
+            ignoreElements: (element) => {
+              // style要素を無視してCSSカラー関数のエラーを回避
+              return element.tagName === "STYLE" || element.tagName === "LINK";
+            },
+            onclone: (clonedDoc) => {
+              // クローンされたドキュメントからTailwindのスタイルを削除
+              const styles = clonedDoc.querySelectorAll("style, link[rel='stylesheet']");
+              styles.forEach((style) => style.remove());
+            },
           });
 
           // 2ページ目以降は新しいページを追加

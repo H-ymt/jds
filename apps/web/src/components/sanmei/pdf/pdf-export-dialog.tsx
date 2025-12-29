@@ -65,9 +65,9 @@ export function PdfExportDialog({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
           render={
-            <Button variant="outline" className="gap-2" disabled>
+            <Button variant="outline" className="gap-2">
               <Download className="h-4 w-4" />
-              鑑定書をダウンロード（開発中）
+              鑑定書をダウンロード
             </Button>
           }
         />
