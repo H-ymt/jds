@@ -187,3 +187,9 @@
   --jusei: oklch(0.627 0.265 303.9);
   --jusei-foreground: oklch(0.977 0.016 308.043);
 }
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}

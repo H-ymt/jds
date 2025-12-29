@@ -50,6 +50,8 @@ export default function Home() {
   return (
     <ResultView
       result={result}
+      birthDate={birthDate}
+      gender={gender}
       isTransformed={isTransformed}
       onToggleTransformed={() => setIsTransformed((prev) => !prev)}
       onBack={handleBack}

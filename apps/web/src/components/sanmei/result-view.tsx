@@ -16,6 +16,7 @@ import {
   JUSEI_INFO,
 } from "./constants";
 import { HumanChart, InsenCard, KangoCard, NikkanCard } from "./human-chart";
+import { PdfExportDialog } from "./pdf";
 import { StarModal } from "./star-modal";
 import { GogyoBadge } from "./star-cell";
 
@@ -23,6 +24,8 @@ type TabId = "chart" | "personality" | "detail";
 
 interface ResultViewProps {
   result: SanmeiResult;
+  birthDate: string;
+  gender: "male" | "female";
   isTransformed: boolean;
   onToggleTransformed: () => void;
   onBack: () => void;
@@ -30,6 +33,8 @@ interface ResultViewProps {
 
 export function ResultView({
   result,
+  birthDate,
+  gender,
   isTransformed,
   onToggleTransformed,
   onBack,
@@ -51,16 +56,24 @@ export function ResultView({
 
   return (
     <div className="min-h-screen p-4">
-      <div className="max-w-lg mx-auto">
-        {/* 戻るボタン */}
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="mb-4 -ml-2 text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="size-4 mr-1" />
-          新しい鑑定
-        </Button>
+      <div className="max-w-xl mx-auto">
+        {/* ヘッダー */}
+        <div className="flex items-center justify-between mb-4">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="-ml-2 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="size-4 mr-1" />
+            新しい鑑定
+          </Button>
+          <PdfExportDialog
+            result={result}
+            birthDate={birthDate}
+            gender={gender}
+            isTransformed={isTransformed}
+          />
+        </div>
 
         {/* タブ */}
         <div className="flex gap-2 mb-4">
