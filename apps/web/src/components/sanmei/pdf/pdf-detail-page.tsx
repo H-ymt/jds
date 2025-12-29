@@ -58,7 +58,7 @@ export function PdfDetailPage({
       style={{
         width: "210mm",
         height: "297mm",
-        padding: "15mm 20mm",
+        padding: "12mm 15mm 18mm 15mm",
         boxSizing: "border-box",
         backgroundColor: "#ffffff",
         fontFamily:
@@ -72,26 +72,26 @@ export function PdfDetailPage({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          paddingBottom: "5mm",
-          borderBottom: "0.5mm solid #e5e5e5",
-          marginBottom: "6mm",
+          paddingBottom: "3mm",
+          borderBottom: "0.3mm solid #e5e5e5",
+          marginBottom: "4mm",
         }}
       >
-        <span style={{ fontSize: "12pt", fontWeight: "bold", color: "#1a1a1a" }}>
+        <span style={{ fontSize: "10pt", fontWeight: "bold", color: "#1a1a1a" }}>
           算命学 鑑定書
         </span>
-        <span style={{ fontSize: "9pt", color: "#666666" }}>生年月日: {formatDate(birthDate)}</span>
+        <span style={{ fontSize: "8pt", color: "#666666" }}>生年月日: {formatDate(birthDate)}</span>
       </div>
 
       {/* あなたの主な傾向 */}
-      <div style={{ marginBottom: "5mm" }}>
+      <div style={{ marginBottom: "3mm" }}>
         <h2
           style={{
-            fontSize: "10pt",
+            fontSize: "9pt",
             fontWeight: "bold",
-            marginBottom: "2mm",
-            paddingLeft: "3mm",
-            borderLeft: "2mm solid #333333",
+            marginBottom: "1.5mm",
+            paddingLeft: "2mm",
+            borderLeft: "1.5mm solid #333333",
             color: "#1a1a1a",
           }}
         >
@@ -101,38 +101,38 @@ export function PdfDetailPage({
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "3mm",
-            padding: "3mm",
+            gap: "2mm",
+            padding: "2mm",
             backgroundColor: "#f5f5f5",
-            borderRadius: "2mm",
+            borderRadius: "1.5mm",
           }}
         >
-          <span style={{ fontSize: "9pt", color: "#666666" }}>最も強い五行:</span>
+          <span style={{ fontSize: "8pt", color: "#666666" }}>最も強い五行:</span>
           <span
             style={{
-              fontSize: "10pt",
+              fontSize: "9pt",
               fontWeight: "bold",
               backgroundColor: GOGYO_COLORS[dominantElement[0]].bg,
               color: GOGYO_COLORS[dominantElement[0]].text,
-              padding: "1mm 3mm",
-              borderRadius: "2mm",
+              padding: "0.5mm 2mm",
+              borderRadius: "1.5mm",
             }}
           >
             {dominantElement[0]}性
           </span>
-          <span style={{ fontSize: "9pt", color: "#666666" }}>が {dominantElement[1]} つ</span>
+          <span style={{ fontSize: "8pt", color: "#666666" }}>が {dominantElement[1]} つ</span>
         </div>
       </div>
 
       {/* 中心星の特徴 */}
-      <div style={{ marginBottom: "5mm" }}>
+      <div style={{ marginBottom: "3mm" }}>
         <h2
           style={{
-            fontSize: "10pt",
+            fontSize: "9pt",
             fontWeight: "bold",
-            marginBottom: "2mm",
-            paddingLeft: "3mm",
-            borderLeft: "2mm solid #333333",
+            marginBottom: "1.5mm",
+            paddingLeft: "2mm",
+            borderLeft: "1.5mm solid #333333",
             color: "#1a1a1a",
           }}
         >
@@ -140,41 +140,41 @@ export function PdfDetailPage({
         </h2>
         <div
           style={{
-            padding: "3mm",
+            padding: "2mm",
             backgroundColor: "#fafafa",
-            borderRadius: "2mm",
+            borderRadius: "1.5mm",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "3mm", marginBottom: "2mm" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "2mm", marginBottom: "1mm" }}>
             <span
               style={{
-                fontSize: "11pt",
+                fontSize: "9pt",
                 fontWeight: "bold",
                 backgroundColor: GOGYO_COLORS[centerStarInfo.element].bg,
                 color: GOGYO_COLORS[centerStarInfo.element].text,
-                padding: "1mm 3mm",
-                borderRadius: "2mm",
+                padding: "0.5mm 2mm",
+                borderRadius: "1.5mm",
               }}
             >
               {centerStar}
             </span>
-            <span style={{ fontSize: "9pt", color: "#666666" }}>{centerStarInfo.keyword}</span>
+            <span style={{ fontSize: "8pt", color: "#666666" }}>{centerStarInfo.keyword}</span>
           </div>
-          <p style={{ fontSize: "8pt", lineHeight: "1.5", color: "#333333" }}>
+          <p style={{ fontSize: "7pt", lineHeight: "1.4", color: "#333333" }}>
             {centerStarInfo.desc}
           </p>
         </div>
       </div>
 
       {/* エネルギーバランス */}
-      <div style={{ marginBottom: "5mm" }}>
+      <div style={{ marginBottom: "3mm" }}>
         <h2
           style={{
-            fontSize: "10pt",
+            fontSize: "9pt",
             fontWeight: "bold",
-            marginBottom: "2mm",
-            paddingLeft: "3mm",
-            borderLeft: "2mm solid #333333",
+            marginBottom: "1.5mm",
+            paddingLeft: "2mm",
+            borderLeft: "1.5mm solid #333333",
             color: "#1a1a1a",
           }}
         >
@@ -184,7 +184,7 @@ export function PdfDetailPage({
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "3mm",
+            gap: "2mm",
           }}
         >
           {juseiStars.map(({ position, phase, star }) => {
@@ -194,18 +194,18 @@ export function PdfDetailPage({
               <div
                 key={position}
                 style={{
-                  padding: "3mm",
+                  padding: "2mm",
                   backgroundColor: "#f5f5f5",
-                  borderRadius: "2mm",
+                  borderRadius: "1.5mm",
                   textAlign: "center",
                 }}
               >
-                <p style={{ fontSize: "8pt", color: "#666666", marginBottom: "1mm" }}>{phase}</p>
-                <p style={{ fontSize: "10pt", fontWeight: "bold", color: "#1a1a1a" }}>{star}</p>
+                <p style={{ fontSize: "7pt", color: "#666666", marginBottom: "0.5mm" }}>{phase}</p>
+                <p style={{ fontSize: "9pt", fontWeight: "bold", color: "#1a1a1a" }}>{star}</p>
                 <div
                   style={{
-                    marginTop: "2mm",
-                    height: "3mm",
+                    marginTop: "1mm",
+                    height: "2mm",
                     backgroundColor: "#e5e5e5",
                     borderRadius: "1mm",
                     overflow: "hidden",
@@ -220,7 +220,7 @@ export function PdfDetailPage({
                     }}
                   />
                 </div>
-                <p style={{ fontSize: "7pt", color: "#888888", marginTop: "1mm" }}>
+                <p style={{ fontSize: "6pt", color: "#888888", marginTop: "0.5mm" }}>
                   {info.energy}/12
                 </p>
               </div>
@@ -230,20 +230,20 @@ export function PdfDetailPage({
       </div>
 
       {/* 全ての星の解説 */}
-      <div style={{ marginBottom: "5mm" }}>
+      <div style={{ marginBottom: "3mm" }}>
         <h2
           style={{
-            fontSize: "10pt",
+            fontSize: "9pt",
             fontWeight: "bold",
-            marginBottom: "2mm",
-            paddingLeft: "3mm",
-            borderLeft: "2mm solid #333333",
+            marginBottom: "1.5mm",
+            paddingLeft: "2mm",
+            borderLeft: "1.5mm solid #333333",
             color: "#1a1a1a",
           }}
         >
           主星の解説
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2mm" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1mm" }}>
           {mainStars.map(({ position, star }) => {
             const info = SHUSEI_INFO[star];
             const posInfo = POSITION_INFO[position];
@@ -251,31 +251,36 @@ export function PdfDetailPage({
               <div
                 key={position}
                 style={{
-                  padding: "2mm 3mm",
+                  padding: "1.5mm 2mm",
                   backgroundColor: "#fafafa",
-                  borderRadius: "2mm",
+                  borderRadius: "1.5mm",
                 }}
               >
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "2mm", marginBottom: "1mm" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "2mm",
+                    marginBottom: "0.5mm",
+                  }}
                 >
                   <span
                     style={{
-                      fontSize: "8pt",
+                      fontSize: "7pt",
                       backgroundColor: GOGYO_COLORS[info.element].bg,
                       color: GOGYO_COLORS[info.element].text,
-                      padding: "0.5mm 2mm",
+                      padding: "0.3mm 1.5mm",
                       borderRadius: "1mm",
                     }}
                   >
                     {star}
                   </span>
-                  <span style={{ fontSize: "8pt", color: "#666666" }}>
+                  <span style={{ fontSize: "7pt", color: "#666666" }}>
                     {posInfo?.title || position}
                   </span>
-                  <span style={{ fontSize: "7pt", color: "#888888" }}>- {info.keyword}</span>
+                  <span style={{ fontSize: "6pt", color: "#888888" }}>- {info.keyword}</span>
                 </div>
-                <p style={{ fontSize: "7pt", lineHeight: "1.4", color: "#444444" }}>{info.desc}</p>
+                <p style={{ fontSize: "6pt", lineHeight: "1.3", color: "#444444" }}>{info.desc}</p>
               </div>
             );
           })}
@@ -286,48 +291,53 @@ export function PdfDetailPage({
       <div>
         <h2
           style={{
-            fontSize: "10pt",
+            fontSize: "9pt",
             fontWeight: "bold",
-            marginBottom: "2mm",
-            paddingLeft: "3mm",
-            borderLeft: "2mm solid #333333",
+            marginBottom: "1.5mm",
+            paddingLeft: "2mm",
+            borderLeft: "1.5mm solid #333333",
             color: "#1a1a1a",
           }}
         >
           十二大従星の解説
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2mm" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1mm" }}>
           {juseiStars.map(({ position, phase, star }) => {
             const info = JUSEI_INFO[star];
             return (
               <div
                 key={position}
                 style={{
-                  padding: "2mm 3mm",
+                  padding: "1.5mm 2mm",
                   backgroundColor: "#fafafa",
-                  borderRadius: "2mm",
+                  borderRadius: "1.5mm",
                 }}
               >
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "2mm", marginBottom: "1mm" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "2mm",
+                    marginBottom: "0.5mm",
+                  }}
                 >
                   <span
                     style={{
-                      fontSize: "8pt",
+                      fontSize: "7pt",
                       backgroundColor: "#6366f1",
                       color: "#ffffff",
-                      padding: "0.5mm 2mm",
+                      padding: "0.3mm 1.5mm",
                       borderRadius: "1mm",
                     }}
                   >
                     {star}
                   </span>
-                  <span style={{ fontSize: "8pt", color: "#666666" }}>
+                  <span style={{ fontSize: "7pt", color: "#666666" }}>
                     {position}（{phase}）
                   </span>
-                  <span style={{ fontSize: "7pt", color: "#888888" }}>- {info.phase}の時期</span>
+                  <span style={{ fontSize: "6pt", color: "#888888" }}>- {info.phase}の時期</span>
                 </div>
-                <p style={{ fontSize: "7pt", lineHeight: "1.4", color: "#444444" }}>{info.desc}</p>
+                <p style={{ fontSize: "6pt", lineHeight: "1.3", color: "#444444" }}>{info.desc}</p>
               </div>
             );
           })}
@@ -338,14 +348,14 @@ export function PdfDetailPage({
       <div
         style={{
           position: "absolute",
-          bottom: "15mm",
-          left: "20mm",
-          right: "20mm",
+          bottom: "10mm",
+          left: "15mm",
+          right: "15mm",
           display: "flex",
           justifyContent: "space-between",
-          paddingTop: "5mm",
-          borderTop: "0.5mm solid #e5e5e5",
-          fontSize: "8pt",
+          paddingTop: "3mm",
+          borderTop: "0.3mm solid #e5e5e5",
+          fontSize: "7pt",
           color: "#666666",
         }}
       >

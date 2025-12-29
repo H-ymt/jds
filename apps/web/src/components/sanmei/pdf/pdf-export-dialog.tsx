@@ -65,13 +65,13 @@ export function PdfExportDialog({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
           render={
-            <Button variant="outline" className="gap-2">
-              <Download className="h-4 w-4" />
+            <Button variant="outline" className="gap-2 shadow-sm">
+              <Download className="size-4" />
               鑑定書をダウンロード
             </Button>
           }
         />
-        <DialogContent showCloseButton={!isGenerating}>
+        <DialogContent showCloseButton={!isGenerating} className="rounded-2xl sm:rounded-2xl">
           <DialogHeader>
             <DialogTitle>PDF鑑定書を出力</DialogTitle>
             <DialogDescription>
@@ -90,6 +90,7 @@ export function PdfExportDialog({
                 value={kanteiName}
                 onChange={(e) => setKanteiName(e.target.value)}
                 disabled={isGenerating}
+                className="rounded-lg"
               />
             </div>
 
@@ -99,12 +100,16 @@ export function PdfExportDialog({
           <DialogFooter>
             <DialogClose
               render={
-                <Button variant="outline" disabled={isGenerating}>
+                <Button variant="outline" disabled={isGenerating} className="rounded-full">
                   キャンセル
                 </Button>
               }
             />
-            <Button onClick={handleGeneratePdf} disabled={isGenerating} className="gap-2">
+            <Button
+              onClick={handleGeneratePdf}
+              disabled={isGenerating}
+              className="gap-2 rounded-full"
+            >
               {isGenerating ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />

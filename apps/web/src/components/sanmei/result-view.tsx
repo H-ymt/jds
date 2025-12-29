@@ -17,8 +17,9 @@ import {
 } from "./constants";
 import { HumanChart, InsenCard, KangoCard, NikkanCard } from "./human-chart";
 import { PdfExportDialog } from "./pdf";
-import { StarModal } from "./star-modal";
+import { ShareButtons } from "./share-buttons";
 import { GogyoBadge } from "./star-cell";
+import { StarModal } from "./star-modal";
 
 type TabId = "chart" | "personality" | "detail";
 
@@ -59,20 +60,19 @@ export function ResultView({
       <div className="max-w-xl mx-auto">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-4">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="-ml-2 text-muted-foreground hover:text-foreground"
-          >
+          <Button variant="ghost" onClick={onBack} className="-ml-2">
             <ArrowLeft className="size-4 mr-1" />
             新しい鑑定
           </Button>
-          <PdfExportDialog
-            result={result}
-            birthDate={birthDate}
-            gender={gender}
-            isTransformed={isTransformed}
-          />
+          <div className="flex items-center gap-2">
+            <ShareButtons centerStar={result.stars.center} birthDate={birthDate} />
+            <PdfExportDialog
+              result={result}
+              birthDate={birthDate}
+              gender={gender}
+              isTransformed={isTransformed}
+            />
+          </div>
         </div>
 
         {/* タブ */}
