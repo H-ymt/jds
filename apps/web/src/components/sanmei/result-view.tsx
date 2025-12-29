@@ -65,7 +65,7 @@ export function ResultView({
 
       <div className="max-w-2xl mx-auto relative z-10">
         {/* ヘッダー */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="sm:flex grid justify-center items-center gap-y-3 sm:justify-between mb-6">
           <Button
             variant="ghost"
             onClick={onBack}

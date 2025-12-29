@@ -29,7 +29,7 @@ export function StarCell({ star, position, showKeyword = true, onClick }: StarCe
       type="button"
       onClick={onClick}
       className={cn(
-        "relative flex flex-col items-center justify-center rounded-2xl p-4 transition-all duration-300",
+        "relative flex flex-col items-center justify-center rounded-2xl p-2 sm:p-4 transition-all duration-300",
         "hover:scale-[1.03] hover:shadow-xl active:scale-[0.97]",
         "border border-white/10 overflow-hidden group",
         "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",

@@ -124,7 +124,7 @@ export function InsenCard({ pillars }: InsenCardProps) {
       </CardHeader>
 
       <CardContent className="pb-8">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-3 gap-4">
           {pillarData.map(({ key, label, desc }) => (
             <div
               key={key}
