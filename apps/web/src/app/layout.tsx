@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 
 import "../index.css";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// メインフォント: Zen角ゴシック（和風モダン、読みやすい）
+const zenKaku = Zen_Kaku_Gothic_New({
+  variable: "--font-zen-kaku",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// サブフォント: Noto Sans JP（フォールバック用）
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "cfs",
-  description: "cfs",
+  title: "算命学鑑定",
+  description: "生年月日から宿命を読み解く算命学鑑定アプリ",
 };
 
 export default function RootLayout({
@@ -27,14 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            {children}
-          </div>
-        </Providers>
+    <html lang="ja" suppressHydrationWarning>
+      <body className={`${zenKaku.variable} ${notoSansJP.variable} antialiased`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

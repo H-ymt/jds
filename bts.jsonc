@@ -9,15 +9,8 @@
   "orm": "drizzle",
   "backend": "hono",
   "runtime": "node",
-  "frontend": [
-    "next"
-  ],
-  "addons": [
-    "turborepo",
-    "oxlint",
-    "pwa",
-    "husky"
-  ],
+  "frontend": ["next"],
+  "addons": ["turborepo", "oxlint", "pwa", "husky"],
   "examples": [],
   "auth": "none",
   "payments": "none",
@@ -25,5 +18,5 @@
   "dbSetup": "neon",
   "api": "trpc",
   "webDeploy": "none",
-  "serverDeploy": "none"
+  "serverDeploy": "none",
 }

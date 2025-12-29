@@ -10,21 +10,21 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "hono": "catalog:",
-    "@hono/node-server": "^1.14.4",
-    "@trpc/server": "catalog:",
-    "@hono/trpc-server": "^0.4.0",
-    "dotenv": "catalog:",
-    "zod": "catalog:",
-    "@cfs/env": "workspace:*",
     "@cfs/api": "workspace:*",
-    "@cfs/db": "workspace:*"
+    "@cfs/db": "workspace:*",
+    "@cfs/env": "workspace:*",
+    "@hono/node-server": "^1.14.4",
+    "@hono/trpc-server": "^0.4.0",
+    "@trpc/server": "catalog:",
+    "dotenv": "catalog:",
+    "hono": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
+    "@cfs/config": "workspace:*",
     "@types/node": "^22.13.11",
-    "typescript": "catalog:",
     "tsdown": "^0.16.5",
-    "@cfs/config": "workspace:*"
+    "tsx": "^4.19.2",
+    "typescript": "catalog:"
   }
 }
