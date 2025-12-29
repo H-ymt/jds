@@ -14,7 +14,7 @@ interface HumanChartProps {
 
 export function HumanChart({ stars, onStarClick, onJuseiClick }: HumanChartProps) {
   return (
-    <Card className="rounded-2xl border-border/50">
+    <Card className="rounded-2xl border-border">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-bold">陽占（ようせん）人体星図</CardTitle>
@@ -104,7 +104,7 @@ export function InsenCard({ pillars }: InsenCardProps) {
   ] as const;
 
   return (
-    <Card className="rounded-2xl border-border/50">
+    <Card className="rounded-2xl border-border">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-bold">陰占（いんせん）</CardTitle>
@@ -142,7 +142,7 @@ interface KangoCardProps {
 
 export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoCardProps) {
   return (
-    <Card className="rounded-2xl border-border/50 bg-gradient-to-r from-pink-500/5 to-purple-500/5">
+    <Card className="rounded-2xl border-border bg-gradient-to-r from-pink-500/5 to-purple-500/5">
       <CardContent className="py-4">
         <div className="flex items-center justify-between mb-2">
           <div>
@@ -192,7 +192,7 @@ interface NikkanCardProps {
 
 export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
   return (
-    <Card className="rounded-2xl border-border/50 bg-gradient-to-r from-amber-500/5 to-orange-500/5">
+    <Card className="rounded-2xl border-border bg-gradient-to-r from-amber-500/5 to-orange-500/5">
       <CardContent className="py-4">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex size-12 items-center justify-center rounded-full bg-amber-500/10">

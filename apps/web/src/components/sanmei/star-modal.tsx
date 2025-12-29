@@ -41,7 +41,7 @@ export function StarModal(props: StarModalProps) {
       {/* モーダルコンテンツ */}
       <div
         className={cn(
-          "relative w-full max-w-sm rounded-2xl border border-border/50 bg-card p-6 shadow-2xl",
+          "relative w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow-2xl",
           "animate-in zoom-in-95 fade-in duration-200",
         )}
         onClick={(e) => e.stopPropagation()}

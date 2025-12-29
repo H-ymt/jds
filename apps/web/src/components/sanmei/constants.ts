@@ -34,6 +34,90 @@ export const GOGYO: Record<(typeof JIKKAN)[number], string> = {
 // 五行タイプ
 export type GogyoType = "木" | "火" | "土" | "金" | "水";
 
+// 五行相生（生じる側 → 生じられる側）
+export const GOGYO_SOJO: Record<GogyoType, GogyoType> = {
+  木: "火",
+  火: "土",
+  土: "金",
+  金: "水",
+  水: "木",
+};
+
+// 五行相剋（剋す側 → 剋される側）
+export const GOGYO_SOKOKU: Record<GogyoType, GogyoType> = {
+  木: "土",
+  土: "水",
+  水: "火",
+  火: "金",
+  金: "木",
+};
+
+// 十二支の五行対応
+export const JUNISHI_GOGYO: Record<(typeof JUNISHI)[number], GogyoType> = {
+  子: "水",
+  丑: "土",
+  寅: "木",
+  卯: "木",
+  辰: "土",
+  巳: "火",
+  午: "火",
+  未: "土",
+  申: "金",
+  酉: "金",
+  戌: "土",
+  亥: "水",
+};
+
+// 支合（六合）
+export const SHIGO_PAIRS: [(typeof JUNISHI)[number], (typeof JUNISHI)[number]][] = [
+  ["子", "丑"],
+  ["寅", "亥"],
+  ["卯", "戌"],
+  ["辰", "酉"],
+  ["巳", "申"],
+  ["午", "未"],
+];
+
+// 三合会局
+export const SANGO_SETS: {
+  members: [(typeof JUNISHI)[number], (typeof JUNISHI)[number], (typeof JUNISHI)[number]];
+  element: GogyoType;
+}[] = [
+  { members: ["寅", "午", "戌"], element: "火" },
+  { members: ["巳", "酉", "丑"], element: "金" },
+  { members: ["申", "子", "辰"], element: "水" },
+  { members: ["亥", "卯", "未"], element: "木" },
+];
+
+// 半会（三合の2つが揃った状態）
+export const HANKAI_PAIRS: {
+  pair: [(typeof JUNISHI)[number], (typeof JUNISHI)[number]];
+  element: GogyoType;
+}[] = [
+  { pair: ["寅", "午"], element: "火" },
+  { pair: ["午", "戌"], element: "火" },
+  { pair: ["寅", "戌"], element: "火" },
+  { pair: ["巳", "酉"], element: "金" },
+  { pair: ["酉", "丑"], element: "金" },
+  { pair: ["巳", "丑"], element: "金" },
+  { pair: ["申", "子"], element: "水" },
+  { pair: ["子", "辰"], element: "水" },
+  { pair: ["申", "辰"], element: "水" },
+  { pair: ["亥", "卯"], element: "木" },
+  { pair: ["卯", "未"], element: "木" },
+  { pair: ["亥", "未"], element: "木" },
+];
+
+// 対冲（沖）
+export const TAICHU_PAIRS: [(typeof JUNISHI)[number], (typeof JUNISHI)[number]][] = [
+  ["子", "午"],
+  ["丑", "未"],
+  ["寅", "申"],
+  ["卯", "酉"],
+  ["辰", "戌"],
+  ["巳", "亥"],
+];
+
 // 蔵干
 export const ZOUKAN: Record<(typeof JUNISHI)[number], (typeof JIKKAN)[number]> = {
   子: "癸",

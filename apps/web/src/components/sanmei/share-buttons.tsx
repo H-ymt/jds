@@ -12,11 +12,10 @@ import {
 import { Button } from "../ui/button";
 
 interface ShareButtonsProps {
-  centerStar: string;
-  birthDate: string;
+  text: string;
 }
 
-export function ShareButtons({ centerStar, birthDate }: ShareButtonsProps) {
+export function ShareButtons({ text }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const getShareUrl = () => {
@@ -24,20 +23,14 @@ export function ShareButtons({ centerStar, birthDate }: ShareButtonsProps) {
     return window.location.href;
   };
 
-  const getShareText = () => {
-    return `【算命学診断結果】\n私の中心星は「${centerStar}」でした！\n\n#算命学 #占い #運勢診断`;
-  };
-
   const handleTwitterShare = () => {
     const url = getShareUrl();
-    const text = getShareText();
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(twitterUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleLineShare = () => {
     const url = getShareUrl();
-    const text = getShareText();
     const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
     window.open(lineUrl, "_blank", "noopener,noreferrer");
   };
@@ -74,7 +67,7 @@ export function ShareButtons({ centerStar, birthDate }: ShareButtonsProps) {
       <DropdownMenuContent align="end" className="w-56 rounded-xl p-2">
         <DropdownMenuItem
           onClick={handleTwitterShare}
-          className="gap-3 cursor-pointer py-2.5 focus:bg-muted"
+          className="gap-3 cursor-pointer py-2.5 rounded-lg focus:bg-muted"
         >
           <div className="flex size-4 items-center justify-center">
             <svg
@@ -89,11 +82,11 @@ export function ShareButtons({ centerStar, birthDate }: ShareButtonsProps) {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleLineShare}
-          className="gap-3 cursor-pointer py-2.5 focus:bg-muted"
+          className="gap-3 cursor-pointer py-2.5 rounded-lg focus:bg-muted"
         >
           <div className="flex size-4 items-center justify-center">
             <svg
-              className="size-4 text-[#06C755] fill-current"
+              className="size-4 fill-[#06C755]"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -104,7 +97,7 @@ export function ShareButtons({ centerStar, birthDate }: ShareButtonsProps) {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={handleCopyLink}
-          className="gap-3 cursor-pointer py-2.5 focus:bg-muted"
+          className="gap-3 cursor-pointer py-2.5 rounded-lg focus:bg-muted"
         >
           <div className="flex size-4 items-center justify-center">
             {copied ? <Check className="size-4 text-green-500" /> : <Link2 className="size-4" />}

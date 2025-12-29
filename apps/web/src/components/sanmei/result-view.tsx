@@ -57,7 +57,7 @@ export function ResultView({
 
   return (
     <div className="min-h-screen p-4">
-      <div className="max-w-xl mx-auto">
+      <div className="max-w-2xl mx-auto">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-4">
           <Button variant="ghost" onClick={onBack} className="-ml-2">
@@ -65,7 +65,9 @@ export function ResultView({
             新しい鑑定
           </Button>
           <div className="flex items-center gap-2">
-            <ShareButtons centerStar={result.stars.center} birthDate={birthDate} />
+            <ShareButtons
+              text={`【算命学診断結果】\n私の中心星は「${result.stars.center}」でした！\n\n#算命学 #占い #運勢診断`}
+            />
             <PdfExportDialog
               result={result}
               birthDate={birthDate}
@@ -158,7 +160,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
   return (
     <>
       {/* 主な傾向 */}
-      <Card className="rounded-2xl border-border/50">
+      <Card className="rounded-2xl border-border">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">あなたの主な傾向</CardTitle>
         </CardHeader>
@@ -189,7 +191,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
       </Card>
 
       {/* エネルギーバランス */}
-      <Card className="rounded-2xl border-border/50">
+      <Card className="rounded-2xl border-border">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">エネルギーバランス</CardTitle>
         </CardHeader>
@@ -231,7 +233,7 @@ function DetailTab({ result }: { result: SanmeiResult }) {
   return (
     <>
       {/* 全ての星の解説 */}
-      <Card className="rounded-2xl border-border/50">
+      <Card className="rounded-2xl border-border">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">全ての星の解説</CardTitle>
         </CardHeader>
@@ -253,7 +255,7 @@ function DetailTab({ result }: { result: SanmeiResult }) {
       </Card>
 
       {/* 十二大従星の解説 */}
-      <Card className="rounded-2xl border-border/50">
+      <Card className="rounded-2xl border-border">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">十二大従星の解説</CardTitle>
         </CardHeader>

@@ -2,7 +2,8 @@
 
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-import { CalendarIcon, Loader2, Sparkles } from "lucide-react";
+import { CalendarIcon, Loader2, Sparkles, Heart } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -41,7 +42,7 @@ export function InputForm({
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-xl rounded-2xl border-border/50 shadow-xl">
+      <Card className="w-full max-w-2xl rounded-2xl border-border shadow-xl">
         <CardHeader className="text-center pb-2">
           <div className="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-primary/10">
             <Sparkles className="size-8 text-primary" />
@@ -138,6 +139,24 @@ export function InputForm({
               </span>
             )}
           </Button>
+
+          {/* 相性診断 */}
+          <div className="pt-4 border-t border-border">
+            <Link href="/compatibility" className="block">
+              <div className="flex items-center justify-between p-4 rounded-xl bg-linear-to-r from-pink-500/28 to-rose-500/28 hover:from-pink-500/32 hover:to-rose-500/32 transition-colors duration-250">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-full bg-pink-500/20">
+                    <Heart className="size-5 text-pink-500" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-sm">相性診断</p>
+                    <p className="text-xs">二人の相性を診断する</p>
+                  </div>
+                </div>
+                <span>→</span>
+              </div>
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>
