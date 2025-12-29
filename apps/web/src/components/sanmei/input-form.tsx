@@ -41,14 +41,8 @@ export function InputForm({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-linear-to-b from-background via-muted/20 to-background overflow-hidden relative">
-      {/* 背景装飾 */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-5%] left-[-5%] size-[400px] rounded-full bg-(--gogyo-wood) blur-[120px] opacity-[0.08]" />
-        <div className="absolute bottom-[-5%] right-[-5%] size-[400px] rounded-full bg-(--gogyo-water) blur-[120px] opacity-[0.08]" />
-      </div>
-
-      <Card className="w-full max-w-2xl rounded-[2rem] border-white/40 dark:border-white/5 shadow-2xl backdrop-blur-xl bg-white/70 dark:bg-black/40 relative z-10 overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#f4f4f4]">
+      <Card variant="premium" className="w-full max-w-2xl relative z-10 overflow-hidden">
         {/* 装飾的な上部ライン */}
         <div className="h-1.5 w-full bg-linear-to-r from-(--gogyo-wood) via-(--gogyo-water) to-(--gogyo-fire)" />
 

@@ -33,6 +33,8 @@ interface PdfExportDialogBaseProps {
   kanteiDate: string;
   /** PDF生成用のref */
   documentRef: RefObject<HTMLDivElement | null>;
+  /** モバイルでラベルを非表示にするか */
+  hideLabelOnMobile?: boolean;
   /** PDFドキュメントコンポーネント（kanteiNameを受け取るrender prop） */
   renderDocument: (kanteiName: string | undefined, kanteiDate: string) => ReactNode;
 }
@@ -44,6 +46,7 @@ export function PdfExportDialogBase({
   filename,
   kanteiDate,
   documentRef,
+  hideLabelOnMobile,
   renderDocument,
 }: PdfExportDialogBaseProps) {
   const [open, setOpen] = useState(false);
@@ -68,9 +71,15 @@ export function PdfExportDialogBase({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
           render={
-            <Button variant="glass" size="pill" className="group">
+            <Button
+              variant="glass"
+              size="pill"
+              className={cn("group", hideLabelOnMobile && "w-11 px-0 sm:w-auto sm:px-6")}
+            >
               <Download className="size-4 text-primary group-hover:scale-110 transition-transform" />
-              <span className="font-semibold">{triggerLabel}</span>
+              <span className={cn("font-semibold", hideLabelOnMobile && "hidden sm:inline")}>
+                {triggerLabel}
+              </span>
             </Button>
           }
         />

@@ -11,6 +11,7 @@ interface CompatibilityPdfDialogProps {
   result: CompatibilityResult;
   person1BirthDate: string;
   person2BirthDate: string;
+  hideLabelOnMobile?: boolean;
 }
 
 function formatDateForFilename(dateString: string): string {
@@ -21,6 +22,7 @@ export function CompatibilityPdfDialog({
   result,
   person1BirthDate,
   person2BirthDate,
+  hideLabelOnMobile,
 }: CompatibilityPdfDialogProps) {
   const documentRef = useRef<HTMLDivElement>(null);
   const kanteiDate = new Date().toISOString().split("T")[0];
@@ -36,6 +38,7 @@ export function CompatibilityPdfDialog({
       filename={filename}
       kanteiDate={kanteiDate}
       documentRef={documentRef}
+      hideLabelOnMobile={hideLabelOnMobile}
       renderDocument={(kanteiName, date) => (
         <CompatibilityPdfDocument
           ref={documentRef}

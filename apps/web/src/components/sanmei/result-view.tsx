@@ -56,39 +56,34 @@ export function ResultView({
   ];
 
   return (
-    <div className="min-h-screen p-4 bg-linear-to-b from-background via-muted/20 to-background">
-      {/* 背景装飾（和のニュアンス） */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-30">
-        <div className="absolute top-[-10%] right-[-10%] size-96 rounded-full bg-(--gogyo-wood) blur-[120px] opacity-10" />
-        <div className="absolute bottom-[-10%] left-[-10%] size-96 rounded-full bg-(--gogyo-water) blur-[120px] opacity-10" />
-      </div>
-
+    <div className="p-4">
       <div className="max-w-2xl mx-auto relative z-10">
         {/* ヘッダー */}
-        <div className="sm:flex grid justify-center items-center gap-y-3 sm:justify-between mb-6">
+        <div className="flex items-center justify-between mb-6">
           <Button
             variant="ghost"
             onClick={onBack}
-            className="-ml-2 h-10 px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
+            className="-ml-2 h-10 w-10 px-0 sm:w-auto sm:px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
           >
-            <ArrowLeft className="size-4 mr-1.5" />
-            <span className="text-sm font-medium">新しい鑑定</span>
+            <ArrowLeft className="size-4 mr-0 sm:mr-1.5" />
+            <span className="text-sm font-medium hidden sm:inline">新しい鑑定</span>
           </Button>
           <div className="flex items-center gap-3">
             <ShareButtons
               text={`【算命学診断結果】\n私の中心星は「${result.stars.center}」でした！\n\n#算命学 #占い #運勢診断`}
+              hideLabelOnMobile
             />
             <PdfExportDialog
               result={result}
               birthDate={birthDate}
               gender={gender}
               isTransformed={isTransformed}
+              hideLabelOnMobile
             />
           </div>
         </div>
 
-        {/* タブのデザインをプレミアムに最適化 */}
-        <div className="flex p-1.5 gap-1.5 mb-6 rounded-2xl bg-muted/30 backdrop-blur-md border border-white/20 dark:border-white/5">
+        <div className="flex p-1 gap-1 mb-8 rounded-[1.25rem] bg-zinc-200/50 dark:bg-zinc-800/50">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -97,15 +92,12 @@ export function ResultView({
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "flex-1 py-3 px-4 rounded-xl text-[13px] font-bold transition-all duration-300 relative overflow-hidden",
+                  "flex-1 py-2.5 px-4 rounded-[1rem] text-[13px] font-bold transition-all duration-200 relative",
                   isActive
-                    ? "text-white shadow-lg scale-[1.02]"
-                    : "text-muted-foreground/70 hover:text-foreground hover:bg-white/40 dark:hover:bg-black/20",
+                    ? "text-zinc-900 bg-white shadow-sm"
+                    : "text-zinc-500 hover:text-zinc-700 hover:bg-white/20",
                 )}
               >
-                {isActive && (
-                  <div className="absolute inset-0 bg-linear-to-br from-[oklch(0.6_0.16_160)] via-[oklch(0.55_0.18_210)] to-(--gogyo-water) animate-in fade-in zoom-in-95 duration-500" />
-                )}
                 <span className="relative z-10">{tab.label}</span>
               </button>
             );
@@ -180,7 +172,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
   return (
     <>
       {/* 主な傾向 */}
-      <Card className="rounded-2xl border-border">
+      <Card variant="premium">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">あなたの主な傾向</CardTitle>
         </CardHeader>
@@ -211,7 +203,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
       </Card>
 
       {/* エネルギーバランス */}
-      <Card className="rounded-2xl border-border">
+      <Card variant="premium">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">エネルギーバランス</CardTitle>
         </CardHeader>
@@ -253,7 +245,7 @@ function DetailTab({ result }: { result: SanmeiResult }) {
   return (
     <>
       {/* 全ての星の解説 */}
-      <Card className="rounded-2xl border-border">
+      <Card variant="premium">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">全ての星の解説</CardTitle>
         </CardHeader>
@@ -275,7 +267,7 @@ function DetailTab({ result }: { result: SanmeiResult }) {
       </Card>
 
       {/* 十二大従星の解説 */}
-      <Card className="rounded-2xl border-border">
+      <Card variant="premium">
         <CardHeader className="pb-3">
           <CardTitle className="text-base font-bold">十二大従星の解説</CardTitle>
         </CardHeader>
@@ -301,6 +293,51 @@ function DetailTab({ result }: { result: SanmeiResult }) {
               </div>
             );
           })}
+        </CardContent>
+      </Card>
+
+      {/* 用語解説 */}
+      <Card
+        variant="premium"
+        className="bg-linear-to-br from-background/50 to-muted/30 backdrop-blur-xl"
+      >
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base font-bold flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-primary" />
+            用語解説
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <h4 className="text-sm font-bold text-foreground">干合（かんごう）とは</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              特定のきっかけによって自分の性質が別人のように変化する現象です。人生にドラマチックな変容をもたらす要素として、以下の3つのパターンがあります。
+            </p>
+            <ul className="space-y-2 pt-1">
+              {[
+                {
+                  label: "対人関係",
+                  text: "特定の相手と出会うことで強烈に惹かれ合い、相手に合わせて自分の性格が変化するような深い縁が生じます。",
+                },
+                {
+                  label: "自分自身の性質",
+                  text: "生まれつき命式に干合を持っている場合は、TPOに応じて自分を使い分ける多面的な性格や、独特のミステリアスな雰囲気を持つようになります。",
+                },
+                {
+                  label: "運勢のタイミング",
+                  text: "特定の時期が巡ってくることで、結婚や転職といった人生を大きく変えるような環境の変化や新しい出会いが訪れます。",
+                },
+              ].map((item, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <span className="shrink-0 text-[10px] font-bold text-primary mt-0.5">●</span>
+                  <div className="space-y-0.5">
+                    <span className="text-[11px] font-bold text-foreground">{item.label}</span>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">{item.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </CardContent>
       </Card>
     </>

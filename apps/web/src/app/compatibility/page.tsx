@@ -96,12 +96,14 @@ function CompatibilityContent() {
   }
 
   return (
-    <CompatibilityResultView
-      result={compatibilityResult}
-      person1BirthDate={person1.birthDate}
-      person2BirthDate={person2.birthDate}
-      onBack={handleBack}
-    />
+    <div className="min-h-screen bg-[#f4f4f4] py-8">
+      <CompatibilityResultView
+        result={compatibilityResult}
+        person1BirthDate={person1.birthDate}
+        person2BirthDate={person2.birthDate}
+        onBack={handleBack}
+      />
+    </div>
   );
 }
 

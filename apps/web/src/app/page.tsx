@@ -71,14 +71,16 @@ function HomeContent() {
   }
 
   return (
-    <ResultView
-      result={result}
-      birthDate={birthDate}
-      gender={gender}
-      isTransformed={isTransformed}
-      onToggleTransformed={() => setIsTransformed((prev) => !prev)}
-      onBack={handleBack}
-    />
+    <div className="min-h-screen bg-[#f4f4f4] py-8">
+      <ResultView
+        result={result}
+        birthDate={birthDate}
+        gender={gender}
+        isTransformed={isTransformed}
+        onToggleTransformed={() => setIsTransformed((prev) => !prev)}
+        onBack={handleBack}
+      />
+    </div>
   );
 }
 

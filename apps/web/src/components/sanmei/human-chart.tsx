@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 import type { Stars, Shusei, Jusei } from "./constants";
@@ -14,22 +14,18 @@ interface HumanChartProps {
 
 export function HumanChart({ stars, onStarClick, onJuseiClick }: HumanChartProps) {
   return (
-    <Card className="rounded-[2rem] border-none shadow-2xl bg-white/70 dark:bg-black/40 backdrop-blur-xl overflow-hidden">
-      <CardHeader className="pb-4 pt-8">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <CardTitle className="text-xl font-black tracking-tight">陽占人体星図</CardTitle>
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-              Aura & Talent Chart
-            </p>
-          </div>
-          <span className="text-[10px] font-extrabold text-(--gogyo-wood) bg-(--gogyo-wood-light) border border-(--gogyo-wood)/10 rounded-full px-3 py-1 uppercase tracking-wider">
-            才能・本質
-          </span>
+    <Card variant="premium" className="overflow-hidden">
+      <CardHeader className="flex-row items-center justify-between pb-8">
+        <div className="space-y-1">
+          <CardTitle className="text-xl font-black tracking-tight">陽占人体星図</CardTitle>
+          <CardDescription>Aura & Talent Chart</CardDescription>
         </div>
+        <span className="text-[10px] font-extrabold text-(--gogyo-wood) bg-(--gogyo-wood-light) border border-(--gogyo-wood)/10 rounded-full px-3 py-1 uppercase tracking-wider">
+          才能・本質
+        </span>
       </CardHeader>
 
-      <CardContent className="space-y-6 pb-8">
+      <CardContent className="space-y-8">
         {/* 人体星図グリッド */}
         <div className="grid grid-cols-3 gap-3">
           {/* 1行目: 右手(従星) - 頭(主星) - 左手(従星) */}
@@ -108,36 +104,32 @@ export function InsenCard({ pillars }: InsenCardProps) {
   ] as const;
 
   return (
-    <Card className="rounded-[2rem] border-none shadow-2xl bg-white/70 dark:bg-black/40 backdrop-blur-xl overflow-hidden">
-      <CardHeader className="pb-4 pt-8">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <CardTitle className="text-xl font-black tracking-tight">陰占（いんせん）</CardTitle>
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-              Destiny Pillars
-            </p>
-          </div>
-          <span className="text-[10px] font-extrabold text-(--gogyo-water) bg-(--gogyo-water-light) border border-(--gogyo-water)/10 rounded-full px-3 py-1 uppercase tracking-wider">
-            宿命・エネルギー
-          </span>
+    <Card variant="premium" className="overflow-hidden">
+      <CardHeader className="flex-row items-center justify-between pb-8">
+        <div className="space-y-1">
+          <CardTitle className="text-xl font-black tracking-tight">陰占（いんせん）</CardTitle>
+          <CardDescription>Destiny Pillars</CardDescription>
         </div>
+        <span className="text-[10px] font-extrabold text-(--gogyo-water) bg-(--gogyo-water-light) border border-(--gogyo-water)/10 rounded-full px-3 py-1 uppercase tracking-wider">
+          宿命・エネルギー
+        </span>
       </CardHeader>
 
-      <CardContent className="pb-8">
+      <CardContent className="pb-10">
         <div className="grid sm:grid-cols-3 gap-4">
           {pillarData.map(({ key, label, desc }) => (
             <div
               key={key}
-              className="flex flex-col items-center rounded-2xl bg-muted/80 p-5 border border-white/20 dark:hover:bg-black/20 transition-colors group"
+              className="flex flex-col items-center rounded-3xl bg-muted/30 p-8 transition-colors group"
             >
-              <span className="text-[10px] font-black text-muted-foreground mb-2 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-muted-foreground mb-6 uppercase tracking-widest">
                 {label}
               </span>
-              <span className="text-3xl font-black text-foreground tracking-tighter">
+              <span className="text-5xl font-black text-foreground tracking-tighter mb-6">
                 {pillars[key].kan}
                 {pillars[key].shi}
               </span>
-              <span className="text-[11px] font-bold text-muted-foreground/80 mt-2">{desc}</span>
+              <span className="text-[11px] font-bold text-muted-foreground/50">{desc}</span>
             </div>
           ))}
         </div>
@@ -156,9 +148,9 @@ interface KangoCardProps {
 
 export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoCardProps) {
   return (
-    <Card className="rounded-3xl border-none shadow-xl bg-linear-to-r from-pink-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-700">
-      <CardContent className="py-6">
-        <div className="flex items-center justify-between gap-6">
+    <Card className="rounded-[3rem] border-none shadow-xl bg-linear-to-r from-pink-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-700">
+      <CardContent className="p-10">
+        <div className="flex items-start justify-between gap-6 mb-6">
           <div className="space-y-2 flex-1">
             <p className="text-[10px] font-black text-pink-500 flex items-center gap-2 uppercase tracking-widest">
               <span className="inline-block size-1.5 rounded-full bg-pink-500 animate-pulse" />
@@ -173,12 +165,11 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
             </p>
           </div>
 
-          {/* トグルスイッチ - プレミアムデザイン */}
           <button
             type="button"
             onClick={onToggle}
             className={cn(
-              "relative h-8 w-14 rounded-full transition-all duration-500 p-1 flex items-center shrink-0",
+              "relative h-8 w-14 rounded-full transition-all duration-500 p-1 flex items-center shrink-0 mt-1",
               isTransformed
                 ? "bg-linear-to-r from-pink-500 to-purple-600 shadow-lg shadow-pink-200"
                 : "bg-muted shadow-inner",
@@ -199,6 +190,40 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
             </div>
           </button>
         </div>
+
+        <div className="pt-5 border-t border-pink-500/10 space-y-4">
+          <p className="text-[13px] leading-relaxed text-foreground/80 font-medium">
+            干合とは、特定のきっかけによって自分の性質が別人のように変化する、非常にドラマチックな現象です。
+          </p>
+          <div className="grid gap-3">
+            {[
+              {
+                title: "対人関係",
+                text: "特定の相手と出会うことで強烈に惹かれ合い、相手に合わせて自分の性格が変化するような深い縁が生じます。",
+              },
+              {
+                title: "自分の性質",
+                text: "生まれつき干合を持っている場合は、TPOに応じて自分を使い分ける多面的な性格や、独特のミステリアスな雰囲気を持つようになります。",
+              },
+              {
+                title: "運勢のタイミング",
+                text: "特定の時期が巡ることで、結婚や転職といった人生を大きく変えるような環境の変化や新しい出会いが訪れます。",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-3 items-start">
+                <span className="shrink-0 text-[10px] font-black px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-600 border border-pink-500/10 mt-0.5">
+                  {item.title}
+                </span>
+                <p className="text-[12px] leading-relaxed text-muted-foreground font-medium">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[11px] text-pink-400 font-bold italic pt-1">
+            人・自分・時期という3つの側面から、人生にドラマチックな変容をもたらします。
+          </p>
+        </div>
       </CardContent>
     </Card>
   );
@@ -215,27 +240,31 @@ interface NikkanCardProps {
 
 export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
   return (
-    <Card className="rounded-[2rem] border-none shadow-2xl bg-white/70 dark:bg-black/40 backdrop-blur-xl overflow-hidden relative">
-      <div className="absolute top-0 right-0 p-8 opacity-5">
-        <span className="text-8xl font-black">{nikkanInfo.name[0]}</span>
+    <Card variant="premium" className="relative group overflow-hidden">
+      {/* 水影文字 */}
+      <div className="absolute top-4 right-8 opacity-5 select-none pointer-events-none">
+        <span className="text-[180px] font-black leading-none">{nikkanInfo.name[0]}</span>
       </div>
 
-      <CardContent className="py-8 px-8">
-        <div className="flex items-center gap-5 mb-6">
-          <div className="flex size-16 items-center justify-center rounded-2xl bg-linear-to-br from-amber-400 to-orange-600 shadow-xl shadow-orange-500/20 text-white">
-            <span className="text-3xl font-black">{nikkanInfo.name[0]}</span>
+      <CardContent className="px-10 pt-10 relative z-10">
+        <div className="flex items-center gap-8 mb-10">
+          <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-linear-to-br from-amber-400 to-orange-600 shadow-xl shadow-orange-500/20 text-white shrink-0">
+            <span className="text-4xl font-black">{nikkanInfo.name[0]}</span>
           </div>
-          <div>
-            <p className="text-2xs font-black text-muted-foreground uppercase tracking-widest mb-1">
+          <div className="space-y-1">
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">
               Your Essence (Nikkan)
             </p>
-            <p className="text-2xl font-black text-foreground tracking-tight">{nikkanInfo.name}</p>
+            <p className="text-4xl font-black text-foreground tracking-tight leading-none">
+              {nikkanInfo.name}{" "}
+              <span className="text-2xl font-bold text-muted-foreground/30 ml-2">（しんきん）</span>
+            </p>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-amber-500/5 p-5 border border-amber-500/10">
-          <p className="text-sm text-foreground/90 leading-relaxed font-medium">
-            <span className="text-orange-600 font-black mr-2">「{nikkanInfo.nature}」の性質：</span>
+        <div className="rounded-[1.5rem] bg-orange-500/5 p-8 border border-orange-500/10">
+          <p className="text-[15px] text-foreground/80 leading-relaxed font-bold">
+            <span className="text-orange-600 mr-2 font-black">「{nikkanInfo.nature}」の性質：</span>
             {nikkanInfo.desc}
           </p>
         </div>

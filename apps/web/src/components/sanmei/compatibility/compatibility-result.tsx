@@ -36,38 +36,34 @@ export function CompatibilityResultView({
   const element2 = GOGYO[result.person2.nikkan];
 
   return (
-    <div className="min-h-screen p-4 bg-linear-to-b from-background via-muted/20 to-background overflow-hidden relative">
-      {/* 背景装飾 */}
-      <div className="fixed inset-0 pointer-events-none opacity-30">
-        <div className="absolute top-[-10%] left-[-10%] size-96 rounded-full bg-(--gogyo-wood) blur-[120px] opacity-10" />
-        <div className="absolute bottom-[-10%] right-[-10%] size-96 rounded-full bg-(--gogyo-water) blur-[120px] opacity-10" />
-      </div>
-
+    <div className="p-4 overflow-hidden relative">
       <div className="mx-auto max-w-2xl relative z-10">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-6">
           <Button
             variant="ghost"
             onClick={onBack}
-            className="-ml-2 h-10 px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
+            className="-ml-2 h-10 w-10 px-0 sm:w-auto sm:px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
           >
-            <ArrowLeft className="size-4 mr-1.5" />
-            <span className="text-sm font-medium">戻る</span>
+            <ArrowLeft className="size-4 mr-0 sm:mr-1.5" />
+            <span className="text-sm font-medium hidden sm:inline">戻る</span>
           </Button>
           <div className="flex items-center gap-3">
             <ShareButtons
               text={`相性診断結果: ${result.overallScore}点（${result.relationshipType.type}）\n\n#算命学 #相性診断 #占い`}
+              hideLabelOnMobile
             />
             <CompatibilityPdfDialog
               result={result}
               person1BirthDate={person1BirthDate}
               person2BirthDate={person2BirthDate}
+              hideLabelOnMobile
             />
           </div>
         </div>
 
         {/* 二人の日干表示 */}
-        <Card className="rounded-[2rem] border-none shadow-2xl overflow-hidden mb-6 bg-white/70 dark:bg-black/40 backdrop-blur-xl">
+        <Card variant="premium" className="mb-6">
           <div className="bg-linear-to-br from-[oklch(0.95_0.02_160)] via-[oklch(0.95_0.02_210)] to-[oklch(0.95_0.02_275)] p-8">
             <div className="flex items-center justify-between gap-4">
               {/* Person 1 */}
@@ -126,8 +122,7 @@ export function CompatibilityResultView({
           </div>
         </Card>
 
-        {/* プレミアムタブ */}
-        <div className="flex p-1.5 gap-1.5 mb-6 rounded-2xl bg-muted/30 backdrop-blur-md border border-white/20 dark:border-white/5">
+        <div className="flex p-1 gap-1 mb-8 rounded-[1.25rem] bg-zinc-200/50 dark:bg-zinc-800/50">
           {[
             { id: "overview", label: "概要" },
             { id: "special", label: "特殊関係" },
@@ -141,15 +136,12 @@ export function CompatibilityResultView({
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "flex-1 py-3 px-1 rounded-xl text-[11px] sm:text-xs font-bold transition-all duration-300 relative overflow-hidden",
+                  "flex-1 py-2.5 px-1 rounded-[1.1rem] text-[11px] sm:text-xs font-bold transition-all duration-200 relative",
                   isActive
-                    ? "text-white shadow-lg scale-[1.02]"
-                    : "text-muted-foreground/70 hover:text-foreground hover:bg-white/40 dark:hover:bg-black/20",
+                    ? "text-zinc-900 bg-white shadow-sm"
+                    : "text-zinc-500 hover:text-zinc-700 hover:bg-white/20",
                 )}
               >
-                {isActive && (
-                  <div className="absolute inset-0 bg-linear-to-br from-[oklch(0.6_0.16_160)] via-[oklch(0.55_0.18_210)] to-(--gogyo-water) animate-in fade-in zoom-in-95 duration-500" />
-                )}
                 <span className="relative z-10">{tab.label}</span>
               </button>
             );
@@ -159,7 +151,7 @@ export function CompatibilityResultView({
         <Tabs value={activeTab} className="mt-4">
           {/* 概要タブ */}
           <TabsContent value="overview" className="mt-0 focus-visible:outline-none">
-            <Card className="rounded-2xl border-border">
+            <Card variant="premium">
               <CardContent className="p-6">
                 <RelationshipCard
                   result={result.relationshipType}
@@ -209,7 +201,7 @@ export function CompatibilityResultView({
 
           {/* 特殊関係タブ */}
           <TabsContent value="special" className="mt-0 focus-visible:outline-none">
-            <Card className="rounded-2xl border-border">
+            <Card variant="premium">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">特殊な関係性</h3>
                 <p className="text-sm text-muted-foreground">算命学における特別な縁のある関係性</p>
@@ -292,7 +284,7 @@ export function CompatibilityResultView({
 
           {/* 五行タブ */}
           <TabsContent value="gogyo" className="mt-0 focus-visible:outline-none">
-            <Card className="rounded-2xl border-border">
+            <Card variant="premium">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">五行の相性</h3>
                 <p className="text-sm text-muted-foreground">五行の相生・相剋による相性分析</p>
@@ -387,7 +379,7 @@ export function CompatibilityResultView({
 
           {/* 宇宙盤タブ */}
           <TabsContent value="uchuban" className="mt-0 focus-visible:outline-none">
-            <Card className="rounded-2xl border-border">
+            <Card variant="premium">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">宇宙盤（行動領域）</h3>
                 <p className="text-sm text-muted-foreground">二人の行動パターンの重なりを可視化</p>

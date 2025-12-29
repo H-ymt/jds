@@ -9,13 +9,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 interface ShareButtonsProps {
   text: string;
+  hideLabelOnMobile?: boolean;
 }
 
-export function ShareButtons({ text }: ShareButtonsProps) {
+export function ShareButtons({ text, hideLabelOnMobile }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const getShareUrl = () => {
@@ -58,9 +60,15 @@ export function ShareButtons({ text }: ShareButtonsProps) {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="glass" size="pill" className="group">
+          <Button
+            variant="glass"
+            size="pill"
+            className={cn("group", hideLabelOnMobile && "w-11 px-0 sm:w-auto sm:px-6")}
+          >
             <Share2 className="size-4 text-primary group-hover:scale-110 transition-transform" />
-            <span className="font-semibold">シェア</span>
+            <span className={cn("font-semibold", hideLabelOnMobile && "hidden sm:inline")}>
+              シェア
+            </span>
           </Button>
         }
       />

@@ -12,6 +12,7 @@ interface PdfExportDialogProps {
   birthDate: string;
   gender: "male" | "female";
   isTransformed: boolean;
+  hideLabelOnMobile?: boolean;
 }
 
 function formatDateForFilename(dateString: string): string {
@@ -23,6 +24,7 @@ export function PdfExportDialog({
   birthDate,
   gender,
   isTransformed,
+  hideLabelOnMobile,
 }: PdfExportDialogProps) {
   const documentRef = useRef<HTMLDivElement>(null);
   const kanteiDate = new Date().toISOString().split("T")[0];
@@ -36,6 +38,7 @@ export function PdfExportDialog({
       filename={filename}
       kanteiDate={kanteiDate}
       documentRef={documentRef}
+      hideLabelOnMobile={hideLabelOnMobile}
       renderDocument={(kanteiName, date) => (
         <PdfDocument
           ref={documentRef}
