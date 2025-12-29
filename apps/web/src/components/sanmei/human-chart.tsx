@@ -120,7 +120,7 @@ export function InsenCard({ pillars }: InsenCardProps) {
           {pillarData.map(({ key, label, desc }) => (
             <div
               key={key}
-              className="flex flex-col items-center rounded-3xl bg-muted/30 dark:bg-muted/10 p-8 transition-colors group"
+              className="flex flex-col items-center rounded-3xl bg-muted/30 dark:bg-zinc-800/50 p-8 transition-colors group border border-transparent dark:border-white/5"
             >
               <span className="text-[10px] font-bold text-muted-foreground mb-6 uppercase tracking-widest">
                 {label}
@@ -246,7 +246,7 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
   return (
     <Card variant="premium" className="relative group overflow-hidden">
       {/* 水影文字 */}
-      <div className="absolute top-4 right-8 opacity-5 dark:opacity-[0.02] select-none pointer-events-none">
+      <div className="absolute top-4 right-8 opacity-5 dark:opacity-[0.08] select-none pointer-events-none transition-opacity duration-300">
         <span className="text-[180px] font-black leading-none">{nikkanInfo.name[0]}</span>
       </div>
 
@@ -261,12 +261,14 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
             </p>
             <p className="text-4xl font-black text-foreground tracking-tight leading-none">
               {nikkanInfo.name}{" "}
-              <span className="text-2xl font-bold text-muted-foreground/30 ml-2">（しんきん）</span>
+              <span className="text-2xl font-bold text-muted-foreground/40 dark:text-muted-foreground/60 ml-2">
+                （しんきん）
+              </span>
             </p>
           </div>
         </div>
 
-        <div className="rounded-[1.5rem] bg-orange-500/5 dark:bg-orange-500/10 p-8 border border-orange-500/10 dark:border-orange-500/20">
+        <div className="rounded-[1.5rem] bg-orange-500/5 dark:bg-linear-to-br dark:from-orange-500/10 dark:to-transparent p-8 border border-orange-500/10 dark:border-orange-500/20">
           <p className="text-[15px] text-foreground/80 leading-relaxed font-bold">
             <span className="text-orange-600 dark:text-orange-400 mr-2 font-black">
               「{nikkanInfo.nature}」の性質：
