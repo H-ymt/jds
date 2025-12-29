@@ -144,17 +144,16 @@ export function CompatibilityInput({
         <div className="h-1.5 w-full bg-linear-to-r from-pink-400 via-rose-500 to-orange-400" />
 
         <CardHeader className="text-center pt-12 pb-6 space-y-4">
-          <div className="flex justify-start absolute top-9 left-8">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground/70 hover:text-foreground transition-colors group"
-            >
-              <div className="size-6 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-pink-500/10 transition-colors">
-                <ArrowLeft className="size-3" />
-              </div>
-              命式鑑定に戻る
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "absolute top-6 left-4 sm:left-6 h-10 w-10 px-0 sm:w-auto sm:px-4 rounded-full",
+            )}
+          >
+            <ArrowLeft className="size-4 mr-0 sm:mr-1.5" />
+            <span>命式鑑定に戻る</span>
+          </Link>
 
           <div className="mx-auto flex size-20 items-center justify-center rounded-[1.5rem] bg-linear-to-br from-pink-500 to-rose-600 shadow-xl shadow-pink-500/20">
             <Heart className="size-10 text-white" />

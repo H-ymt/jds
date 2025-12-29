@@ -63,10 +63,10 @@ export function ResultView({
           <Button
             variant="ghost"
             onClick={onBack}
-            className="-ml-2 h-10 w-10 px-0 sm:w-auto sm:px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
+            className="-ml-2 h-10 w-10 px-0 sm:w-auto sm:px-4 rounded-full"
           >
             <ArrowLeft className="size-4 mr-0 sm:mr-1.5" />
-            <span className="text-sm font-medium hidden sm:inline">新しい鑑定</span>
+            <span>新しい鑑定</span>
           </Button>
           <div className="flex items-center gap-3">
             <ShareButtons
