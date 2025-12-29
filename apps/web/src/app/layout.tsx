@@ -30,6 +30,9 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className={`${zenKaku.variable} ${notoSansJP.variable} antialiased`}>
+        {/* <Providers>
+          <AuthGate>{children}</AuthGate>
+        </Providers> */}
         <Providers>{children}</Providers>
       </body>
     </html>

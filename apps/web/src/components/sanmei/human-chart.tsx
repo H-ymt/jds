@@ -142,7 +142,7 @@ interface KangoCardProps {
 
 export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoCardProps) {
   return (
-    <Card className="rounded-2xl border-border bg-gradient-to-r from-pink-500/5 to-purple-500/5">
+    <Card className="rounded-2xl border-border bg-linear-to-r from-pink-500/5 to-purple-500/5">
       <CardContent className="py-4">
         <div className="flex items-center justify-between mb-2">
           <div>
@@ -160,14 +160,14 @@ export function KangoCard({ pair, transformed, isTransformed, onToggle }: KangoC
             type="button"
             onClick={onToggle}
             className={cn(
-              "relative h-7 w-14 rounded-full transition-all duration-200",
+              "relative h-7 w-12 rounded-full transition-all duration-200",
               isTransformed ? "bg-pink-500" : "bg-muted",
             )}
           >
             <span
               className={cn(
-                "absolute top-1 size-5 rounded-full bg-white shadow transition-transform",
-                isTransformed ? "translate-x-8" : "translate-x-1",
+                "absolute top-1 left-1 size-5 rounded-full bg-white shadow transition-all duration-200",
+                isTransformed ? "translate-x-5" : "translate-x-0",
               )}
             />
           </button>

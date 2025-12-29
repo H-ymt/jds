@@ -99,12 +99,6 @@ export function ResultView({
         {/* 星図タブ */}
         {activeTab === "chart" && (
           <div className="space-y-4">
-            {/* 日干解説 */}
-            <NikkanCard nikkanInfo={nikkanInfo} />
-
-            {/* 陰占 */}
-            <InsenCard pillars={result.pillars} />
-
             {/* 干合（存在する場合） */}
             {result.kango.exists && result.kango.pair && result.kango.transformed && (
               <KangoCard
@@ -114,6 +108,12 @@ export function ResultView({
                 onToggle={onToggleTransformed}
               />
             )}
+
+            {/* 日干解説 */}
+            <NikkanCard nikkanInfo={nikkanInfo} />
+
+            {/* 陰占 */}
+            <InsenCard pillars={result.pillars} />
 
             {/* 人体星図 */}
             <HumanChart
