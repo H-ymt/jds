@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
 import { GOGYO, NIKKAN_INFO, SHUSEI_INFO } from "../constants";
 import { ShareButtons } from "../share-buttons";
@@ -13,6 +13,7 @@ import type { CompatibilityResult } from "./compatibility-constants";
 import { CosmicChart } from "./cosmic-chart";
 import { CompatibilityPdfDialog } from "./pdf";
 import { RelationshipCard } from "./relationship-card";
+import { cn } from "@/lib/utils";
 
 interface CompatibilityResultViewProps {
   result: CompatibilityResult;
@@ -35,86 +36,129 @@ export function CompatibilityResultView({
   const element2 = GOGYO[result.person2.nikkan];
 
   return (
-    <div className="min-h-screen p-4">
-      <div className="mx-auto max-w-2xl">
+    <div className="min-h-screen p-4 bg-linear-to-b from-background via-muted/20 to-background overflow-hidden relative">
+      {/* 背景装飾 */}
+      <div className="fixed inset-0 pointer-events-none opacity-30">
+        <div className="absolute top-[-10%] left-[-10%] size-96 rounded-full bg-(--gogyo-wood) blur-[120px] opacity-10" />
+        <div className="absolute bottom-[-10%] right-[-10%] size-96 rounded-full bg-(--gogyo-water) blur-[120px] opacity-10" />
+      </div>
+
+      <div className="mx-auto max-w-2xl relative z-10">
         {/* ヘッダー */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <Button
             variant="ghost"
             onClick={onBack}
-            className="-ml-2 flex items-center text-muted-foreground hover:text-foreground"
+            className="-ml-2 h-10 px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
           >
-            <ArrowLeft className="size-4 mr-1" />
-            <span>戻る</span>
+            <ArrowLeft className="size-4 mr-1.5" />
+            <span className="text-sm font-medium">戻る</span>
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <ShareButtons
+              text={`相性診断結果: ${result.overallScore}点（${result.relationshipType.type}）\n\n#算命学 #相性診断 #占い`}
+            />
             <CompatibilityPdfDialog
               result={result}
               person1BirthDate={person1BirthDate}
               person2BirthDate={person2BirthDate}
             />
-            <ShareButtons
-              text={`相性診断結果: ${result.overallScore}点（${result.relationshipType.type}）\n\n#算命学 #相性診断 #占い`}
-            />
           </div>
         </div>
 
         {/* 二人の日干表示 */}
-        <Card className="rounded-2xl border-border overflow-hidden mb-4 py-0">
-          <div className="bg-linear-to-r from-blue-500/10 via-pink-500/10 to-orange-500/10 p-6">
-            <div className="flex items-center justify-center gap-4">
+        <Card className="rounded-[2rem] border-none shadow-2xl overflow-hidden mb-6 bg-white/70 dark:bg-black/40 backdrop-blur-xl">
+          <div className="bg-linear-to-br from-[oklch(0.95_0.02_160)] via-[oklch(0.95_0.02_210)] to-[oklch(0.95_0.02_275)] p-8">
+            <div className="flex items-center justify-between gap-4">
               {/* Person 1 */}
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-1">あなた</div>
-                <div
-                  className="size-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg"
-                  style={{ backgroundColor: `var(--gogyo-${element1})` }}
-                >
-                  {result.person1.nikkan}
+              <div className="flex-1 text-center space-y-3">
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                  あなた
+                </p>
+                <div className="relative inline-block group">
+                  <div className="absolute inset-0 bg-white/20 blur-xl rounded-full group-hover:bg-white/40 transition-colors" />
+                  <div
+                    className="size-20 relative rounded-full flex items-center justify-center text-3xl font-black shadow-2xl border-4 border-white/50"
+                    style={{
+                      background: `var(--gogyo-${element1})`,
+                      color: `var(--gogyo-${element1}-foreground)`,
+                    }}
+                  >
+                    {result.person1.nikkan}
+                  </div>
                 </div>
-                <div className="text-sm mt-2 font-medium">{nikkan1Info.nature}</div>
+                <div className="text-[13px] font-bold text-foreground/80">{nikkan1Info.nature}</div>
               </div>
 
               {/* 中央のスコア */}
-              <div className="text-center px-6">
-                <div className="text-4xl font-bold text-pink-500">{result.overallScore}</div>
-                <div className="text-xs text-muted-foreground">点</div>
+              <div className="text-center px-4 relative">
+                <div className="absolute inset-0 bg-pink-500/10 blur-2xl rounded-full" />
+                <div className="relative">
+                  <div className="text-5xl font-black text-pink-500 tracking-tighter drop-shadow-sm">
+                    {result.overallScore}
+                  </div>
+                  <div className="text-[10px] font-bold text-pink-500/70 uppercase tracking-widest -mt-1">
+                    Match Score
+                  </div>
+                </div>
               </div>
 
               {/* Person 2 */}
-              <div className="text-center">
-                <div className="text-xs text-muted-foreground mb-1">相手</div>
-                <div
-                  className="size-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg"
-                  style={{ backgroundColor: `var(--gogyo-${element2})` }}
-                >
-                  {result.person2.nikkan}
+              <div className="flex-1 text-center space-y-3">
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                  相手
+                </p>
+                <div className="relative inline-block group">
+                  <div className="absolute inset-0 bg-white/20 blur-xl rounded-full group-hover:bg-white/40 transition-colors" />
+                  <div
+                    className="size-20 relative rounded-full flex items-center justify-center text-3xl font-black shadow-2xl border-4 border-white/50"
+                    style={{
+                      background: `var(--gogyo-${element2})`,
+                      color: `var(--gogyo-${element2}-foreground)`,
+                    }}
+                  >
+                    {result.person2.nikkan}
+                  </div>
                 </div>
-                <div className="text-sm mt-2 font-medium">{nikkan2Info.nature}</div>
+                <div className="text-[13px] font-bold text-foreground/80">{nikkan2Info.nature}</div>
               </div>
             </div>
           </div>
         </Card>
 
-        {/* タブコンテンツ */}
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4 rounded-xl">
-            <TabsTrigger value="overview" className="rounded-lg text-xs">
-              概要
-            </TabsTrigger>
-            <TabsTrigger value="special" className="rounded-lg text-xs">
-              特殊関係
-            </TabsTrigger>
-            <TabsTrigger value="gogyo" className="rounded-lg text-xs">
-              五行
-            </TabsTrigger>
-            <TabsTrigger value="uchuban" className="rounded-lg text-xs">
-              宇宙盤
-            </TabsTrigger>
-          </TabsList>
+        {/* プレミアムタブ */}
+        <div className="flex p-1.5 gap-1.5 mb-6 rounded-2xl bg-muted/30 backdrop-blur-md border border-white/20 dark:border-white/5">
+          {[
+            { id: "overview", label: "概要" },
+            { id: "special", label: "特殊関係" },
+            { id: "gogyo", label: "五行" },
+            { id: "uchuban", label: "宇宙盤" },
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "flex-1 py-3 px-1 rounded-xl text-[11px] sm:text-xs font-bold transition-all duration-300 relative overflow-hidden",
+                  isActive
+                    ? "text-white shadow-lg scale-[1.02]"
+                    : "text-muted-foreground/70 hover:text-foreground hover:bg-white/40 dark:hover:bg-black/20",
+                )}
+              >
+                {isActive && (
+                  <div className="absolute inset-0 bg-linear-to-br from-[oklch(0.6_0.16_160)] via-[oklch(0.55_0.18_210)] to-(--gogyo-water) animate-in fade-in zoom-in-95 duration-500" />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
+        <Tabs value={activeTab} className="mt-4">
           {/* 概要タブ */}
-          <TabsContent value="overview" className="mt-4">
+          <TabsContent value="overview" className="mt-0 focus-visible:outline-none">
             <Card className="rounded-2xl border-border">
               <CardContent className="p-6">
                 <RelationshipCard
@@ -164,7 +208,7 @@ export function CompatibilityResultView({
           </TabsContent>
 
           {/* 特殊関係タブ */}
-          <TabsContent value="special" className="mt-4">
+          <TabsContent value="special" className="mt-0 focus-visible:outline-none">
             <Card className="rounded-2xl border-border">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">特殊な関係性</h3>
@@ -247,7 +291,7 @@ export function CompatibilityResultView({
           </TabsContent>
 
           {/* 五行タブ */}
-          <TabsContent value="gogyo" className="mt-4">
+          <TabsContent value="gogyo" className="mt-0 focus-visible:outline-none">
             <Card className="rounded-2xl border-border">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">五行の相性</h3>
@@ -342,7 +386,7 @@ export function CompatibilityResultView({
           </TabsContent>
 
           {/* 宇宙盤タブ */}
-          <TabsContent value="uchuban" className="mt-4">
+          <TabsContent value="uchuban" className="mt-0 focus-visible:outline-none">
             <Card className="rounded-2xl border-border">
               <CardHeader className="pb-2">
                 <h3 className="text-lg font-bold">宇宙盤（行動領域）</h3>

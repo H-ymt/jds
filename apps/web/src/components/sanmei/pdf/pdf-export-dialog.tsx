@@ -32,7 +32,7 @@ export function PdfExportDialog({
     <PdfExportDialogBase
       triggerLabel="鑑定書をダウンロード"
       dialogTitle="PDF鑑定書を出力"
-      dialogDescription="鑑定書をPDF形式でダウンロードします。鑑定者名を入力すると、PDFに記載されます。"
+      dialogDescription="鑑定書をPDF形式でダウンロードします。鑑定者名を入力すると、PDFに記載されます。（一部表記が崩れることがあります）"
       filename={filename}
       kanteiDate={kanteiDate}
       documentRef={documentRef}

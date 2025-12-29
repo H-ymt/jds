@@ -56,15 +56,25 @@ export function ResultView({
   ];
 
   return (
-    <div className="min-h-screen p-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen p-4 bg-linear-to-b from-background via-muted/20 to-background">
+      {/* 背景装飾（和のニュアンス） */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-30">
+        <div className="absolute top-[-10%] right-[-10%] size-96 rounded-full bg-(--gogyo-wood) blur-[120px] opacity-10" />
+        <div className="absolute bottom-[-10%] left-[-10%] size-96 rounded-full bg-(--gogyo-water) blur-[120px] opacity-10" />
+      </div>
+
+      <div className="max-w-2xl mx-auto relative z-10">
         {/* ヘッダー */}
-        <div className="flex items-center justify-between mb-4">
-          <Button variant="ghost" onClick={onBack} className="-ml-2">
-            <ArrowLeft className="size-4 mr-1" />
-            新しい鑑定
+        <div className="flex items-center justify-between mb-6">
+          <Button
+            variant="ghost"
+            onClick={onBack}
+            className="-ml-2 h-10 px-4 rounded-full hover:bg-white/50 dark:hover:bg-black/20 text-muted-foreground/80"
+          >
+            <ArrowLeft className="size-4 mr-1.5" />
+            <span className="text-sm font-medium">新しい鑑定</span>
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <ShareButtons
               text={`【算命学診断結果】\n私の中心星は「${result.stars.center}」でした！\n\n#算命学 #占い #運勢診断`}
             />
@@ -77,37 +87,47 @@ export function ResultView({
           </div>
         </div>
 
-        {/* タブ */}
-        <div className="flex gap-2 mb-4">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className={cn(
-                "flex-1 py-2.5 rounded-xl text-sm font-medium transition-all",
-                activeTab === tab.id
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "bg-muted hover:bg-muted/80 text-muted-foreground",
-              )}
-            >
-              {tab.label}
-            </button>
-          ))}
+        {/* タブのデザインをプレミアムに最適化 */}
+        <div className="flex p-1.5 gap-1.5 mb-6 rounded-2xl bg-muted/30 backdrop-blur-md border border-white/20 dark:border-white/5">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "flex-1 py-3 px-4 rounded-xl text-[13px] font-bold transition-all duration-300 relative overflow-hidden",
+                  isActive
+                    ? "text-white shadow-lg scale-[1.02]"
+                    : "text-muted-foreground/70 hover:text-foreground hover:bg-white/40 dark:hover:bg-black/20",
+                )}
+              >
+                {isActive && (
+                  <div className="absolute inset-0 bg-linear-to-br from-[oklch(0.6_0.16_160)] via-[oklch(0.55_0.18_210)] to-(--gogyo-water) animate-in fade-in zoom-in-95 duration-500" />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* 星図タブ */}
         {activeTab === "chart" && (
           <div className="space-y-4">
             {/* 干合（存在する場合） */}
-            {result.kango.exists && result.kango.pair && result.kango.transformed && (
-              <KangoCard
-                pair={result.kango.pair}
-                transformed={result.kango.transformed}
-                isTransformed={isTransformed}
-                onToggle={onToggleTransformed}
-              />
-            )}
+            {result.kango.exists &&
+              result.kango.pair &&
+              result.kango.transformed &&
+              (result.kango.pair[0] as string) &&
+              (result.kango.pair[1] as string) && (
+                <KangoCard
+                  pair={[result.kango.pair[0] as string, result.kango.pair[1] as string]}
+                  transformed={result.kango.transformed}
+                  isTransformed={isTransformed}
+                  onToggle={onToggleTransformed}
+                />
+              )}
 
             {/* 日干解説 */}
             <NikkanCard nikkanInfo={nikkanInfo} />

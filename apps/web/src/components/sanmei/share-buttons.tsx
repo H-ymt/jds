@@ -58,9 +58,9 @@ export function ShareButtons({ text }: ShareButtonsProps) {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="shadow-sm">
-            <Share2 className="size-4" />
-            シェア
+          <Button variant="glass" size="pill" className="group">
+            <Share2 className="size-4 text-primary group-hover:scale-110 transition-transform" />
+            <span className="font-semibold">シェア</span>
           </Button>
         }
       />
