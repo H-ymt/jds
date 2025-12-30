@@ -178,7 +178,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
         </CardHeader>
         <CardContent className="space-y-4">
           {/* 最も強い五行 */}
-          <div className="rounded-xl bg-gradient-to-r from-primary/5 to-primary/10 p-4">
+          <div className="rounded-xl bg-linear-to-r from-primary/5 to-primary/10 p-4">
             <p className="text-xs text-muted-foreground mb-1">最も強い五行</p>
             <div className="flex items-center gap-2">
               <GogyoBadge element={result.dominantElement[0]} className="text-sm px-3 py-1.5" />
@@ -219,7 +219,7 @@ function PersonalityTab({ result }: { result: SanmeiResult }) {
                 <div className="w-16 text-xs text-muted-foreground">{star}</div>
                 <div className="flex-1 h-2.5 bg-muted rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-primary/80 to-primary rounded-full transition-all"
+                    className="h-full bg-linear-to-r from-primary/80 to-primary rounded-full transition-all"
                     style={{ width: `${(info.energy / 12) * 100}%` }}
                   />
                 </div>

@@ -26,55 +26,57 @@ export function HumanChart({ stars, onStarClick, onJuseiClick }: HumanChartProps
       </CardHeader>
 
       <CardContent className="space-y-8">
-        {/* 人体星図グリッド */}
+        {/* 人体星図グリッド - 算命学Stockの配置に準拠 */}
         <div className="grid grid-cols-3 gap-3">
-          {/* 1行目: 右手(従星) - 頭(主星) - 左手(従星) */}
-          <JuseiCell
-            star={stars.jusei.right}
-            position="右手"
-            onClick={() => onJuseiClick(stars.jusei.right, "右手（初年運）")}
+          {/* 1行目: 右肩(主星/見守り星) - 頭(主星/北方星) - 左肩(従星/第三従星) */}
+          <StarCell
+            star={stars.northWest}
+            position="右肩"
+            onClick={() => onStarClick(stars.northWest, "右肩（見守り星）")}
           />
           <StarCell
             star={stars.north}
             position="頭"
-            onClick={() => onStarClick(stars.north, "頭")}
+            onClick={() => onStarClick(stars.north, "頭（北方星）")}
           />
           <JuseiCell
-            star={stars.jusei.left}
-            position="左手"
-            onClick={() => onJuseiClick(stars.jusei.left, "左手（中年運）")}
+            star={stars.jusei.center}
+            position="左肩"
+            onClick={() => onJuseiClick(stars.jusei.center, "左肩（幼少期）")}
           />
 
-          {/* 2行目: 左肩(主星) - 胸(主星/中心) - 右肩(主星) */}
+          {/* 2行目: 右手(主星/西方星) - 胸(主星/中心星) - 左手(主星/東方星) */}
           <StarCell
-            star={stars.east}
-            position="左肩"
-            onClick={() => onStarClick(stars.east, "左肩")}
+            star={stars.west}
+            position="右手"
+            onClick={() => onStarClick(stars.west, "右手（西方星）")}
           />
           <StarCell
             star={stars.center}
             position="胸"
-            onClick={() => onStarClick(stars.center, "胸")}
+            onClick={() => onStarClick(stars.center, "胸（中心星）")}
           />
           <StarCell
-            star={stars.west}
-            position="右肩"
-            onClick={() => onStarClick(stars.west, "右肩")}
+            star={stars.east}
+            position="左手"
+            onClick={() => onStarClick(stars.east, "左手（東方星）")}
           />
 
-          {/* 3行目: 空 - 腹(主星) - 左足(従星) */}
-          <div className="flex items-center justify-center">
-            <div className="size-1 rounded-full bg-border/40" />
-          </div>
+          {/* 3行目: 右足(従星/第一従星) - 腹(主星/南方星) - 左足(従星/第二従星) */}
+          <JuseiCell
+            star={stars.jusei.right}
+            position="右足"
+            onClick={() => onJuseiClick(stars.jusei.right, "右足（晩年期）")}
+          />
           <StarCell
             star={stars.south}
             position="腹"
-            onClick={() => onStarClick(stars.south, "腹")}
+            onClick={() => onStarClick(stars.south, "腹（南方星）")}
           />
           <JuseiCell
-            star={stars.jusei.center}
+            star={stars.jusei.left}
             position="左足"
-            onClick={() => onJuseiClick(stars.jusei.center, "左足（晩年運）")}
+            onClick={() => onJuseiClick(stars.jusei.left, "左足（中年期）")}
           />
         </div>
 
@@ -246,12 +248,12 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
   return (
     <Card variant="premium" className="relative group overflow-hidden">
       {/* 水影文字 */}
-      <div className="absolute top-4 right-8 opacity-5 dark:opacity-[0.08] select-none pointer-events-none transition-opacity duration-300">
+      <div className="absolute top-4 right-8 opacity-5 select-none pointer-events-none transition-opacity duration-300">
         <span className="text-[180px] font-black leading-none">{nikkanInfo.name[0]}</span>
       </div>
 
-      <CardContent className="px-10 pt-10 relative z-10">
-        <div className="flex items-center gap-8 mb-10">
+      <CardContent className="px-6 pt-6 sm:px-10 sm:pt-10">
+        <div className="flex flex-row items-center sm:gap-8 gap-6 mb-10">
           <div className="flex size-20 items-center justify-center rounded-[1.5rem] bg-linear-to-br from-amber-400 to-orange-600 shadow-xl shadow-orange-500/20 text-white shrink-0">
             <span className="text-4xl font-black">{nikkanInfo.name[0]}</span>
           </div>
@@ -259,9 +261,9 @@ export function NikkanCard({ nikkanInfo }: NikkanCardProps) {
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">
               Your Essence (Nikkan)
             </p>
-            <p className="text-4xl font-black text-foreground tracking-tight leading-none">
-              {nikkanInfo.name}{" "}
-              <span className="text-2xl font-bold text-muted-foreground/40 dark:text-muted-foreground/60 ml-2">
+            <p className="sm:text-4xl text-2xl flex flex-col sm:flex-row gap-y-2 items-start font-black text-foreground tracking-tight leading-none">
+              {nikkanInfo.name}
+              <span className="text-2xl font-bold text-muted-foreground/40 sm:ml-2">
                 （しんきん）
               </span>
             </p>
