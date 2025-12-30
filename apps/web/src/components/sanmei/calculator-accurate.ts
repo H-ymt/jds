@@ -6,6 +6,9 @@
 import {
   JIKKAN,
   ZOUKAN,
+  NIJUHACHIGEN,
+  SHIGO_MAP,
+  SANGO_TEIO,
   JUDAI_SHUSEI,
   JUNIDAI_JUSEI,
   KANGO_RULES,
@@ -363,22 +366,65 @@ export function calculateSanmeiAccurate(
     }
   }
 
-  // 人体星図の算出（陽占）
+  // 人体星図の算出（陽占）- PDF流派の配置ルール
+  // （半代 大和様.pdf より）
+  //
+  // 【十大主星】
+  // 北(頭): 日干 × 年干 → 目上運（北方星）
+  // 中央(胸): 日干 × 月支蔵干（本気）→ 基本性格（中心星）
+  // 南(腹): 日干 × 月干 → 目下運（南方星）
+  // 東(左手): 日干 × 年支蔵干（二十八元による中気）→ 社会・友人運（東方星）
+  // 西(右手): 日干 × 日支蔵干（本気）→ パートナー運（西方星）
+  // 右肩（伴星）: 日干 × 年干 → ご先祖様
+  //
+  // 【十二大従星】
+  // 左肩: 日干 × 日支 → 初年期（幼少期）
+  // 右足: 日干 × 年支の三合帝旺位 → 晩年期
+  // 左足: 日干 × 日支の支合相手 → 中年期
+
+  // 節入りからの日数を計算（左手の二十八元計算用）
+  const setsuiriDay = getSetsuiriDay(year, month);
+  let daysFromSetsuiri = day - setsuiriDay + 1;
+  // 節入り前の場合は前月からの継続とみなす
+  if (daysFromSetsuiri <= 0) {
+    // 前月の節入り日を基準に計算（簡易的に30日で計算）
+    daysFromSetsuiri = day + (30 - setsuiriDay) + 1;
+  }
+
+  // 年支蔵干を二十八元で取得（東方星用）
+  const nijuhachi = NIJUHACHIGEN[pillars.year.shi];
+  let yearShiZoukan: Jikkan;
+  if (daysFromSetsuiri <= nijuhachi.shoki[1]) {
+    yearShiZoukan = nijuhachi.shoki[0];
+  } else if (daysFromSetsuiri <= nijuhachi.shoki[1] + nijuhachi.chuki[1]) {
+    yearShiZoukan = nijuhachi.chuki[0];
+  } else {
+    yearShiZoukan = nijuhachi.honki;
+  }
+
   const stars: Stars = {
-    north: calcShuseiAccurate(nikkan, ZOUKAN[pillars.month.shi]), // 頭: 月支蔵干
-    center: calcShuseiAccurate(nikkan, nikkan), // 胸: 日干自身
-    south: calcShuseiAccurate(nikkan, ZOUKAN[pillars.day.shi]), // 腹: 日支蔵干
-    east: calcShuseiAccurate(nikkan, ZOUKAN[pillars.year.shi]), // 左肩: 年支蔵干
-    west: calcShuseiAccurate(nikkan, pillars.month.kan), // 右肩: 月干
+    north: calcShuseiAccurate(nikkan, pillars.year.kan), // 頭: 年干 → 目上運
+    center: calcShuseiAccurate(nikkan, ZOUKAN[pillars.month.shi]), // 胸: 月支蔵干（本気）→ 基本性格
+    south: calcShuseiAccurate(nikkan, pillars.month.kan), // 腹: 月干 → 目下運
+    east: calcShuseiAccurate(nikkan, yearShiZoukan), // 左手: 年支蔵干（二十八元）→ 社会・友人運
+    west: calcShuseiAccurate(nikkan, ZOUKAN[pillars.day.shi]), // 右手: 日支蔵干（本気）→ パートナー運
+    northWest: calcShuseiAccurate(nikkan, pillars.year.kan), // 右肩: 日干×年干 → 伴星
     jusei: {
-      right: calcJuseiAccurate(nikkan, pillars.year.shi), // 右足: 年支
-      left: calcJuseiAccurate(nikkan, pillars.month.shi), // 左足: 月支
-      center: calcJuseiAccurate(nikkan, pillars.day.shi), // 中央下: 日支
+      center: calcJuseiAccurate(nikkan, pillars.day.shi), // 左肩: 日支 → 初年期（幼少期）
+      right: calcJuseiAccurate(nikkan, SANGO_TEIO[pillars.year.shi]), // 右足: 年支の三合帝旺位 → 晩年期
+      left: calcJuseiAccurate(nikkan, SHIGO_MAP[pillars.day.shi]), // 左足: 日支の支合相手 → 中年期
     },
   };
 
   // 全体の傾向を分析
-  const allStars: Shusei[] = [stars.north, stars.center, stars.south, stars.east, stars.west];
+  const allStars: Shusei[] = [
+    stars.north,
+    stars.center,
+    stars.south,
+    stars.east,
+    stars.west,
+    stars.northWest,
+  ];
   const elements = allStars.map((s) => SHUSEI_INFO[s]?.element);
   const elementCount = elements.reduce(
     (acc, e) => {

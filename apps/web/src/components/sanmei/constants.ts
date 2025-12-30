@@ -118,7 +118,7 @@ export const TAICHU_PAIRS: [(typeof JUNISHI)[number], (typeof JUNISHI)[number]][
   ["巳", "亥"],
 ];
 
-// 蔵干
+// 蔵干（本気のみ）
 export const ZOUKAN: Record<(typeof JUNISHI)[number], (typeof JIKKAN)[number]> = {
   子: "癸",
   丑: "己",
@@ -132,6 +132,79 @@ export const ZOUKAN: Record<(typeof JUNISHI)[number], (typeof JIKKAN)[number]> =
   酉: "辛",
   戌: "戊",
   亥: "壬",
+};
+
+/**
+ * 二十八元（蔵干の期間配分）
+ * 各支には初気・中気・本気の3つの蔵干があり、節入りからの日数で使い分ける
+ * 形式: { 初気: [干, 日数], 中気: [干, 日数], 本気: [干] }
+ *
+ * 参考: 早見表.pdf 16ページ
+ * - 初気から中気への切り替えは「初気の日数 + 1」日目から
+ * - 中気から本気への切り替えは「初気の日数 + 中気の日数 + 1」日目から
+ */
+export const NIJUHACHIGEN: Record<
+  (typeof JUNISHI)[number],
+  {
+    shoki: [(typeof JIKKAN)[number], number];
+    chuki: [(typeof JIKKAN)[number], number];
+    honki: (typeof JIKKAN)[number];
+  }
+> = {
+  子: { shoki: ["壬", 10], chuki: ["癸", 0], honki: "癸" }, // 子は癸のみ
+  丑: { shoki: ["癸", 9], chuki: ["辛", 3], honki: "己" },
+  寅: { shoki: ["戊", 7], chuki: ["丙", 7], honki: "甲" },
+  卯: { shoki: ["甲", 10], chuki: ["乙", 0], honki: "乙" }, // 卯は乙のみ
+  辰: { shoki: ["乙", 9], chuki: ["癸", 3], honki: "戊" },
+  巳: { shoki: ["戊", 5], chuki: ["庚", 9], honki: "丙" },
+  午: { shoki: ["丙", 10], chuki: ["己", 9], honki: "丁" },
+  未: { shoki: ["丁", 9], chuki: ["乙", 3], honki: "己" },
+  申: { shoki: ["己", 10], chuki: ["壬", 3], honki: "庚" },
+  酉: { shoki: ["庚", 10], chuki: ["辛", 0], honki: "辛" }, // 酉は辛のみ
+  戌: { shoki: ["辛", 9], chuki: ["丁", 3], honki: "戊" },
+  亥: { shoki: ["戊", 7], chuki: ["甲", 5], honki: "壬" },
+};
+
+/**
+ * 支合（六合）のマッピング
+ * 各支の支合相手を直接取得するためのマップ
+ */
+export const SHIGO_MAP: Record<(typeof JUNISHI)[number], (typeof JUNISHI)[number]> = {
+  子: "丑",
+  丑: "子",
+  寅: "亥",
+  亥: "寅",
+  卯: "戌",
+  戌: "卯",
+  辰: "酉",
+  酉: "辰",
+  巳: "申",
+  申: "巳",
+  午: "未",
+  未: "午",
+};
+
+/**
+ * 三合帝旺位のマッピング
+ * 各支が属する三合局の「帝旺」位置（中央の支）を返す
+ * - 寅午戌（火局）→ 帝旺は午
+ * - 巳酉丑（金局）→ 帝旺は酉
+ * - 申子辰（水局）→ 帝旺は子
+ * - 亥卯未（木局）→ 帝旺は卯
+ */
+export const SANGO_TEIO: Record<(typeof JUNISHI)[number], (typeof JUNISHI)[number]> = {
+  寅: "午",
+  午: "午",
+  戌: "午", // 火局
+  巳: "酉",
+  酉: "酉",
+  丑: "酉", // 金局
+  申: "子",
+  子: "子",
+  辰: "子", // 水局
+  亥: "卯",
+  卯: "卯",
+  未: "卯", // 木局
 };
 
 // 節入り日
@@ -413,15 +486,16 @@ export interface KangoResult {
 }
 
 export interface Stars {
-  north: Shusei;
-  center: Shusei;
-  south: Shusei;
-  east: Shusei;
-  west: Shusei;
+  north: Shusei; // 頭（北方星）- 目上運
+  center: Shusei; // 胸（中心星）- 基本性格
+  south: Shusei; // 腹（南方星）- 目下運
+  east: Shusei; // 左手（東方星）- 社会・友人運
+  west: Shusei; // 右手（西方星）- パートナー運
+  northWest: Shusei; // 右肩（見守り星）- ご先祖様
   jusei: {
-    right: Jusei;
-    left: Jusei;
-    center: Jusei;
+    right: Jusei; // 右足（第一従星）- 晩年期
+    left: Jusei; // 左足（第二従星）- 中年期
+    center: Jusei; // 左肩（第三従星）- 幼少期
   };
 }
 

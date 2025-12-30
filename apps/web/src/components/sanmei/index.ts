@@ -1,6 +1,7 @@
 export * from "./constants";
 export * from "./calculator";
-export * from "./calculator-accurate";
+// calculator-accurate.ts は calculator.ts と同じ関数名を持つため、
+// 必要な場合は個別にインポートする: import { calcShuseiAccurate } from "./calculator-accurate"
 export * from "./kanshi-calendar";
 export * from "./setsuiri-data";
 export * from "./input-form";
