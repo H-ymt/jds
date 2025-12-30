@@ -1,10 +1,4 @@
-import {
-  JUSEI_TABLE,
-  SANGO_TEIO,
-  SHIGO_MAP,
-  JUNISHI,
-  JIKKAN,
-} from "./src/components/sanmei/constants";
+import { SANGO_TEIO, SHIGO_MAP, JUNISHI, JIKKAN } from "./src/components/sanmei/constants";
 import { calcJusei } from "./src/components/sanmei/calculator";
 
 // 逆算: 日干と従星から、使用された十二支を特定する

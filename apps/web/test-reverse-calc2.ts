@@ -35,16 +35,16 @@ console.log("天印星を得る支: 丑");
 console.log("丑は金局(巳酉丑)の一員、年支(酉)も金局の一員");
 
 // 三合の別の支を探す
-const SANGO_GROUPS = {
+const SANGO_GROUPS: Record<string, readonly string[]> = {
   火局: ["寅", "午", "戌"],
   金局: ["巳", "酉", "丑"],
   水局: ["申", "子", "辰"],
   木局: ["亥", "卯", "未"],
-} as const;
+};
 
 function findSangoGroup(shi: string): string[] | null {
   for (const [name, group] of Object.entries(SANGO_GROUPS)) {
-    if (group.includes(shi as any)) {
+    if (group.includes(shi)) {
       return [...group];
     }
   }
