@@ -329,7 +329,9 @@ function DetailTab({ result }: { result: SanmeiResult }) {
                 },
               ].map((item, i) => (
                 <li key={i} className="flex gap-2 items-start">
-                  <span className="shrink-0 text-[10px] font-bold text-primary mt-0.5">●</span>
+                  <span className="shrink-0 text-xxs font-bold text-primary mt-0.5 leading-[1lh]">
+                    ●
+                  </span>
                   <div className="space-y-0.5">
                     <span className="text-[11px] font-bold text-foreground">{item.label}</span>
                     <p className="text-[11px] text-muted-foreground leading-relaxed">{item.text}</p>
