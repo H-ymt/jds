@@ -46,15 +46,15 @@ export function InputForm({
         {/* 装飾的な上部ライン */}
         <div className="h-1.5 w-full bg-linear-to-r from-(--gogyo-wood) via-(--gogyo-water) to-(--gogyo-fire)" />
 
-        <CardHeader className="text-center pt-10 pb-6 space-y-4">
+        <CardHeader className="text-center items-center pt-10 flex-col sm:flex-row pb-6 gap-y-3 gap-x-5 w-fit">
           <div className="mx-auto flex size-20 items-center justify-center rounded-[1.5rem] bg-linear-to-br from-(--gogyo-wood) to-[oklch(0.55_0.15_160)] shadow-lg shadow-emerald-500/20">
             <Sparkles className="size-10 text-white" />
           </div>
-          <div className="space-y-1">
-            <CardTitle className="text-3xl font-extrabold tracking-tight bg-linear-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <div className="space-y-1 sm:text-left flex flex-col gap-y-2">
+            <CardTitle className="text-3xl mb-0! font-extrabold tracking-tight bg-linear-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
               算命学鑑定
             </CardTitle>
-            <CardDescription className="text-sm font-medium text-muted-foreground">
+            <CardDescription className="text-sm sm:text-center text-left font-medium text-muted-foreground">
               生年月日から、あなただけの宿命の星を読み解きます
             </CardDescription>
           </div>
